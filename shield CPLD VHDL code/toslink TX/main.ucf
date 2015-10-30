@@ -1,0 +1,20 @@
+NET "iCLK"  LOC = "p1"  ;
+
+NET "fiber_out"  LOC = "p6"  ;
+NET "fiber_in"  LOC = "p2"  ;
+
+NET "parallel_in<0>" LOC = "p12"  ; #step X
+NET "parallel_in<1>" LOC = "p16"  ; #dir X
+NET "parallel_in<2>" LOC = "p13"  ; #step Y
+NET "parallel_in<3>" LOC = "p18"  ; #dir Y
+NET "parallel_in<4>" LOC = "p14"  ; #step Z
+NET "parallel_in<5>" LOC = "p19"  ; #dir Z
+NET "parallel_in<6>" LOC = "p20"  ; #enable
+NET "parallel_in<7>" LOC = "p27"  ; #general purpose
+
+NET "parallel_out<0>" LOC = "p21" ; #limit X
+NET "parallel_out<1>" LOC = "p22" ; #limit Y
+NET "parallel_out<2>" LOC = "p23" ; #limit Z
+
+NET "iCLK" TNM_NET = iCLK;
+timespec TS_iCLK = PERIOD "iCLK" 20 ns HIGH 50%;
