@@ -12,9 +12,13 @@ NET "parallel_out<5>" LOC = "p19"  ; #dir Z
 NET "parallel_out<6>" LOC = "p20"  ; #enable
 NET "parallel_out<7>" LOC = "p27"  ; #general purpose
 
-NET "parallel_in<0>" LOC = "p21"   ; #limit X
-NET "parallel_in<1>" LOC = "p22"   ; #limit Y
-NET "parallel_in<2>" LOC = "p23"   ; #limit Z
+NET "parallel_in<0>" LOC = "p41"   ; #limit X, A1
+NET "parallel_in<1>" LOC = "p39"   ; #limit Y, A3
+NET "parallel_in<2>" LOC = "p37"   ; #limit Z, A5
+
+NET "gnds<0>" LOC = "p42";
+NET "gnds<1>" LOC = "p40";
+NET "gnds<2>" LOC = "p38";
 
 NET "iCLK" TNM_NET = iCLK;
 timespec TS_iCLK = PERIOD "iCLK" 20 ns HIGH 50%;

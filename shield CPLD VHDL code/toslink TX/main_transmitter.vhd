@@ -54,8 +54,6 @@ signal s:std_logic_vector(n-1 downto 0) := (others => '0');
 
 begin
 
---s<=parallel_in(11 downto 0);
-
 s<=(
 		0=>step_cnt_x,
 		1=>dir_value_x,

@@ -9,7 +9,8 @@ entity main_receiver is
            parallel_out : out  STD_LOGIC_VECTOR (n-1 downto 0);
            fiber_in : in  STD_LOGIC;
 			  parallel_in : in  STD_LOGIC_VECTOR (2 downto 0);
-           fiber_out : out  STD_LOGIC
+           fiber_out : out  STD_LOGIC;
+			  gnds : out std_logic_vector (2 downto 0)
 			);
 end main_receiver;
 
@@ -40,8 +41,6 @@ architecture Behavioral of main_receiver is
 
 begin
 
-	--parallel_out<=s(n-1 downto 0);
-
 	parallel_out<=(
 					0=>(s(0) xor s_prev(0)) and step_sync,--step x
 					1=>s(1), -- dir x
@@ -68,4 +67,6 @@ begin
 					  s => parallel_in,
 					  optic_out => fiber_out
 					  );
+					  
+	gnds <= (others => '0');
 end Behavioral;
