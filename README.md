@@ -15,7 +15,7 @@ We created universal PCB which can be used as a stand-alone stepper motor contro
  * Error pin from PoStep connector should not supposed to be connected to the Limit signal. 
  * Additional headers and the corresponding pull-up resistors for limit switches should be added to the PCB. 
  * Because of huge voltage difference between 24V and 5V two LDOs or a switching regulator should be used instead of TLV1117-5V (the later handles only input voltages lower than 15V).
- * 
+ 
  
 ---
 
