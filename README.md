@@ -10,9 +10,15 @@ Our design is based on [Serializer / Deserializer for Audio Fiber Optic](http://
 
 We created universal PCB which can be used as a stand-alone stepper motor controller or as a shield attached to Arduino Uno. PCB consists of one CPLD, three optical transmitters, three optical receivers, headers for Arduino Uno and connectors for [Pololu's DRV8825 stepper motor driver carrier](https://www.pololu.com/product/2133) and for [PoLabs' PoStep25-32 driver](http://www.poscope.com/PoStep25-32). PCB can also be connected to [CNC USB Controller Mk3/4 from Planet CNC](http://www.planet-cnc.com/index.php?page=hardware) Shield enables cloning of one of the three axes. The axis to be cloned is set using jumpers Clone STP and Clone DIR. DRV8825 microstepping is being set using jumpers MicroStepJP X, Y, Z and A. There is also a header for connecting limit switches. Motors are being powered through terminal block J1 (+24V). Digital part of the circuit can be powered through terminal block J2 (+5V) or through Arduino Uno if attached as a shield. Toslink transmitter DLT1111 and Toslink receiver DLR1111 were used, which enable data transfer speed up to 16 Mbps. We used Xilinx XC9572XL CPLD to implement the necessary logic for protocol conversion.
 
+![toslink-cnc-1](images/toslink-3.png)
+![toslink-cnc-2](images/toslink-4.png)
+
 ## Toslink Receiver
 
 For each motor on the CNC machine there is one PCB, containing Toslink receiver. Receiver PCB, together with motor driver, can be mounted on the motor. Receiver is being used with PoStep25-32 motor driver. PCB is being powered through motor driver connector using +5V. To enable this the +5V supply from motor driver should be connected to unused 9th pin on the driver's IDC connector usign a piece of isolated wire. PCB consists of one CPLD, two optical transmitters, one optical receiver, one DIP switch for selecting the axis and one limit switch connector, which is isolated through an optocoupler. Receivers can be connected in dasy chain.
+
+![toslink-cnc-3](images/toslink-1.png)
+![toslink-cnc-4](images/toslink-2.png)
 
 ##Known Isues
 
