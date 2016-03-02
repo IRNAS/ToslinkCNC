@@ -1,0 +1,28 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SW_DIP_1
+D Switch DIP 1
+K Switch
+$ENDCMP
+#
+$CMP SW_DIP_2
+D Switch DIP 2
+K Switch
+$ENDCMP
+#
+$CMP SW_DIP_3
+D Switch DIP 3
+K Switch
+$ENDCMP
+#
+$CMP SW_DIP_4
+D Switch DIP 4
+K Switch
+$ENDCMP
+#
+$CMP SW_DIP_8
+D Switch DIP 8
+K Switch
+$ENDCMP
+#
+#End Doc Library

@@ -54,8 +54,6 @@ begin
 					optic_cnt <= optic_cnt + 1;
 			end if;
 			
-			-- generate output Manchester waveform
-			
 			case tx_output is	
 				when "00" =>
 					case optic_cnt(3 downto 2) is

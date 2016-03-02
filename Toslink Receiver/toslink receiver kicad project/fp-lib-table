@@ -1,0 +1,7 @@
+(fp_lib_table
+  (lib (name VQFP44)(type KiCad)(uri "$(KIPRJMOD)\\VQFP44.pretty")(options "")(descr ""))
+  (lib (name KSEK43J_LFS_TACTILE_SWITCH)(type KiCad)(uri "$(KIPRJMOD)\\KSEK43J_LFS_TACTILE_SWITCH.pretty")(options "")(descr ""))
+  (lib (name CFPS-9-50M)(type KiCad)(uri "$(KIPRJMOD)\\CFPS-9-50M.pretty")(options "")(descr ""))
+  (lib (name OMRON_ELECTRONIC_COMPONENTS_A6S-3102-H_DIP_Switch)(type KiCad)(uri "$(KIPRJMOD)\\OMRON_ELECTRONIC_COMPONENTS_A6S-3102-H_DIP_Switch.pretty")(options "")(descr ""))
+  (lib (name OPEN_HW)(type KiCad)(uri "$(KIPRJMOD)\\OPEN_HW.pretty")(options "")(descr ""))
+)

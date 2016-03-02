@@ -6,12 +6,12 @@ use IEEE.std_logic_unsigned.all;
 entity main_transmitter is
     Port ( 
 	        iCLK : in  STD_LOGIC;
-			parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
-			limit_in1 : in STD_LOGIC;
-			fiber_out1 : out  STD_LOGIC;
-			fiber_out2 : out  STD_LOGIC;
-			fiber_out3 : out  STD_LOGIC
-  		 );
+           parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
+			  limit_in1 : in STD_LOGIC;
+           fiber_out1 : out  STD_LOGIC;
+			  fiber_out2 : out  STD_LOGIC;
+			  fiber_out3 : out  STD_LOGIC
+  			);
 end main_transmitter;
 
 architecture Behavioral of main_transmitter is
