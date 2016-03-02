@@ -6,17 +6,18 @@ Parallel bus on longer distances and in noisy environment can be susceptible to 
 
 Our design is based on [Serializer / Deserializer for Audio Fiber Optic](http://opencores.org/project,parallel_io_through_fiber) project published on Open Cores. 
 
-We created universal PCB which can be used as a stand-alone stepper motor controller or as a shield attached to Arduino Uno. PCB consists of one CPLD, three optical transmitters, three optical receivers, headers for Arduino Uno and connectors for [Pololu’s DRV8825 stepper motor driver carrier](https://www.pololu.com/product/2133) and for [PoLabs’ PoStep25-32 driver](http://www.poscope.com/PoStep25-32). Shield enables cloning of one of the three axes. The axis to be cloned is set using jumpers Clone STP, Clone DIR and Clone LIMIT. DRV8825 microstepping is being set using jumpers MicroStepJP X, Y, Z and A. Motors are being powered through terminal block J1. Digital part of the circuit can be powered directly using onboard 5V linear regulator if the jumper JP EXT_V is set or through terminal block J2 or Arduino Uno if attached as a shield. Toslink transmitter DLT1111 and toslink receiver DLR1111 were used, which enable data transfer speed up to 16 Mbps. We used Xilinx XC9572XL CPLD to implement the necessary logic for protocol conversion. A single CPLD can hold both the serializer for parallel to serial conversion and the deserializer for serial to parallel conversion.
+## Toslink Transmitter / Arduino Shield
+
+We created universal PCB which can be used as a stand-alone stepper motor controller or as a shield attached to Arduino Uno. PCB consists of one CPLD, three optical transmitters, three optical receivers, headers for Arduino Uno and connectors for [Pololu's DRV8825 stepper motor driver carrier](https://www.pololu.com/product/2133) and for [PoLabs' PoStep25-32 driver](http://www.poscope.com/PoStep25-32). Shield also enables cloning of one of the three axes. The axis to be cloned is set using jumpers Clone STP and Clone DIR. DRV8825 microstepping is being set using jumpers MicroStepJP X, Y, Z and A. There is also a header for connecting limit switches. Motors are being powered through terminal block J1 (+24V). Digital part of the circuit can be powered through terminal block J2 (+5V) or through Arduino Uno if attached as a shield. Toslink transmitter DLT1111 and toslink receiver DLR1111 were used, which enable data transfer speed up to 16 Mbps. We used Xilinx XC9572XL CPLD to implement the necessary logic for protocol conversion.
+
+## Toslink Receiver
+
+For each motor on the CNC machine there is one PCB, containing Toslink receiver. Receiver is being connected to PoStep25-32 driver. Receiver PCB is being powered through motor driver connector using +5V. PCB consists of one CPLD, two optical transmitters, one optical receiver, one DIP switch for selecting the axis and one limit switch connector, which is isolated through an optocoupler. Receivers can be connected in dasy chain.
 
 ##Known Isues
 
- * Footprints for DLT1111 and DLR1111 are wrong - signal pins (VCC, GND, Vin/Vout) should be behind the mounting holes.
- * For PoStep connectors the IDC connectors should be used instead of dual row male headers. 
- * Error pin from PoStep connector should not supposed to be connected to the Limit signal. 
- * Additional headers and the corresponding pull-up resistors for limit switches should be added to the PCB. 
- * Because of huge voltage difference between 24V and 5V two LDOs or a switching regulator should be used instead of TLV1117-5V (the later handles only input voltages lower than 15V).
- 
- 
+ * There is currently not enough room on the CPLD to hold both, the transmitter and the receiver. To enable transfer of limit switch signals from receivers back to transmitter, there would also need to be an additional optical receiver implemented on the CPLD.
+
 ---
 
 #### License
@@ -33,6 +34,5 @@ All our websites and additional documentation are licensed under [Creative Commo
 
 What this means is that you can use hardware, firmware, software and documentation without paying a royalty and knowing that you'll be able to use your version forever. You are also free to make changes but if you share these changes then you have to do so on the same conditions that you enjoy.
 
-Koruza, GoodEnoughCNC and IRNAS are all names and marks of Institut IRNAS Rače. 
+Koruza, GoodEnoughCNC and IRNAS are all names and marks of Institut IRNAS RaÄŤe. 
 You may use these names and terms only to attribute the appropriate entity as required by the Open Licences referred to above. You may not use them in any other way and in particular you may not use them to imply endorsement or authorization of any hardware that you design, make or sell.
-
