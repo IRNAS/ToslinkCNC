@@ -32,9 +32,11 @@ architecture Behavioral of optic_transmitter is
 		return i;
 	end log2;
 
-	signal shift_reg : STD_LOGIC_VECTOR(11 downto 0) := "000000100000";
+	signal shift_reg : STD_LOGIC_VECTOR(11 downto 0) := "000000100010";
 	signal tx_output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
-	signal optic_cnt : STD_LOGIC_VECTOR(7 downto 0) := (others => '1');
+	signal optic_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+	signal bit_cnt : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+	signal start_of_frame : STD_LOGIC := '0';
 
 begin
 					  
@@ -42,53 +44,75 @@ begin
 	begin
 		if (iCLK'event and iCLK = '1') then
 			
-			if (optic_cnt = "11001111") then -- packet generating
+			if (optic_cnt = 0) then -- start of bit
+			
+				if (bit_cnt = 12) then -- packet generating
 					shift_reg <= s(9 downto 0)&odd_parity(s(9 downto 0))&(not odd_parity(s(9 downto 0)));
+					bit_cnt <= (others => '0');
 					tx_output <= "10"; -- generate del on output
-					optic_cnt <= (others => '0');
-			elsif (optic_cnt(3 downto 0) = "1111") then -- end of bit
+					start_of_frame <= '1';
+				else
 					shift_reg <= shift_reg(10 downto 0)&'0'; -- shift for one bit and add '0'
 					tx_output <= (1 => '0')&shift_reg(11); -- output one bit
-					optic_cnt <= optic_cnt + 1;
-			else
-					optic_cnt <= optic_cnt + 1;
+					bit_cnt <= bit_cnt + 1;
+					start_of_frame <= '0';
+				end if;
+				
+				optic_cnt <= optic_cnt + 1;
+			elsif (optic_cnt = 23) then
+				optic_cnt <= (others => '0');
+         else
+				optic_cnt <= optic_cnt + 1;
+				start_of_frame <= '0';
 			end if;
 			
 			case tx_output is	
 				when "00" =>
-					case optic_cnt(3 downto 2) is
-						when "00" =>
+					case optic_cnt(4 downto 2) is
+						when "000" =>
 							optic_out <= '1';
-						when "01" =>
+						when "001" =>
 							optic_out <= '1';	
-						when "10" =>
+						when "010" =>
 							optic_out <= '0';	
+						when "011" =>
+							optic_out <= '0';	
+						when "100" =>
+							optic_out <= '1';	
 						when others =>
 							optic_out <= '0';
 					end case;
-				
+					
 				when "01" =>
-					case optic_cnt(3 downto 2) is
-						when "00" =>
-							optic_out <= '0';
-						when "01" =>
-							optic_out <= '1';	
-						when "10" =>
-							optic_out <= '0';	
-						when others =>
+					case optic_cnt(4 downto 2) is
+						when "000" =>
 							optic_out <= '1';
+						when "001" =>
+							optic_out <= '0';	
+						when "010" =>
+							optic_out <= '1';	
+						when "011" =>
+							optic_out <= '0';	
+						when "100" =>
+							optic_out <= '1';	
+						when others =>
+							optic_out <= '0';
 					end case;
 				
-				when others =>
-					case optic_cnt(3 downto 2) is
-						when "00" =>
+				when others => -- DEL
+					case optic_cnt(4 downto 2) is
+						when "000" =>
 							optic_out <= '1';
-						when "01" =>
+						when "001" =>
 							optic_out <= '1';	
-						when "10" =>
+						when "010" =>
 							optic_out <= '1';	
+						when "011" =>
+							optic_out <= '0';	
+						when "100" =>
+							optic_out <= '0';	
 						when others =>
-							optic_out <= '1';
+							optic_out <= '0';
 					end case;
 			end case;
 						

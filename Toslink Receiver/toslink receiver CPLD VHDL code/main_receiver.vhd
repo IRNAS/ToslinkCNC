@@ -8,7 +8,6 @@ entity main_receiver is
 	        iCLK : in  STD_LOGIC;
 			  axis_sel : in std_logic_vector(2 downto 0);
 			  limit : in std_logic;
-			  error : in std_logic;
            parallel_out : out  STD_LOGIC_VECTOR (2 downto 0);
            fiber_in : in  STD_LOGIC;
 			  fiber_out1 : out  STD_LOGIC;
@@ -28,7 +27,6 @@ architecture Behavioral of main_receiver is
 				axis_sel : in std_logic_vector(2 downto 0);
 				optic_in : IN std_logic;
 				limit : in std_logic;
-				error : in std_logic;
 				optic_out : out std_logic;
 				s : OUT STD_LOGIC_VECTOR(2 downto 0);
 				led_error : out std_logic;
@@ -62,9 +60,6 @@ architecture Behavioral of main_receiver is
 	
 	signal no_link:std_logic := '0';
 	
-	-- low pass filter
-	--signal q1 : STD_LOGIC := '0';
-	--signal q2 : STD_LOGIC := '0';
 	signal limit_clean:std_logic := '0';
 
 begin
@@ -75,7 +70,6 @@ begin
 						  axis_sel => axis_sel,
 						  optic_in => fiber_in,
 						  limit => limit_clean,
-						  error => error,
 						  optic_out => fiber_out,
 						  s => s,
 						  led_error => led_error_intern,

@@ -7,7 +7,7 @@ entity main_transmitter is
     Port ( 
 	        iCLK : in  STD_LOGIC;
            parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
-			  limit_in1 : in STD_LOGIC;
+			  limit_in : STD_LOGIC_VECTOR (2 downto 0);
            fiber_out1 : out  STD_LOGIC;
 			  fiber_out2 : out  STD_LOGIC;
 			  fiber_out3 : out  STD_LOGIC
@@ -23,8 +23,6 @@ architecture Behavioral of main_transmitter is
 				optic_out : OUT std_logic
 			 );
 	END COMPONENT;
-	
-	signal limit_in : STD_LOGIC_VECTOR (2 downto 0) := (others => '0');
 	
 	-- transmitter
 	signal in_step_x:std_logic := '0';
@@ -58,10 +56,6 @@ architecture Behavioral of main_transmitter is
 	signal out_z : std_logic := '0';
 
 begin
-
-	limit_in(0) <= limit_in1;
-	limit_in(1) <= limit_in1;
-	limit_in(2) <= limit_in1;
 
 	fiber_out1 <= fiber_out;
 	fiber_out2 <= fiber_out;

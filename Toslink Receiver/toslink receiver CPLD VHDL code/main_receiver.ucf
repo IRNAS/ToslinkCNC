@@ -5,7 +5,7 @@ NET "fiber_out2"  LOC = "p34"  ; #TX2
 NET "fiber_in"  LOC = "p33"  ; #RX
 
 NET "limit"  LOC = "p19"  ; #limit
-NET "error" LOC = "p3" ; #driver error
+#NET "error" LOC = "p3" ; #driver error
 
 NET "axis_sel<0>" LOC = "p16" ; #axis select 3
 NET "axis_sel<1>" LOC = "p13" ; #axis select 2

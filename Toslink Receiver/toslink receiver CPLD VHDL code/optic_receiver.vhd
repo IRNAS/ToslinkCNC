@@ -9,7 +9,6 @@ entity optic_receiver is
 			   axis_sel : in std_logic_vector(2 downto 0);
 				optic_in : IN std_logic;
 				limit : in std_logic;
-				error : in std_logic;
 				optic_out : out std_logic;
 				s : OUT STD_LOGIC_VECTOR(2 downto 0);
 				led_error : out std_logic;
@@ -25,6 +24,7 @@ architecture Behavioral of optic_receiver is
 	component manchester_decoder is
 		port(
 		      iCLK : in std_logic;
+				no_link : in std_logic;
 				optic_in : in std_logic;
 				irq_out : out std_logic;
 				decoded_out : out std_logic_vector(1 downto 0)
@@ -55,7 +55,7 @@ architecture Behavioral of optic_receiver is
 	
 	signal shift_reg : STD_LOGIC_VECTOR(11 downto 0) := "000000100000";
 	signal parity : std_logic := '1';
-	signal optic_cnt : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+	signal optic_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 	
 	signal tx_output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	
@@ -75,6 +75,7 @@ begin
 	decoder:manchester_decoder
 		 Port map ( 
 						iCLK => iCLK,
+						no_link => no_link,
 						optic_in => optic_in,
 						irq_out => latch_rx,
 						decoded_out => rx_input
@@ -84,6 +85,7 @@ begin
 	begin
 		if (iCLK'event and iCLK = '1') then
 			
+			-- connection lost detect
 			if (optic_in = optic_in_prev) then
 				fail_cnt <= fail_cnt + 1;
 			else
@@ -93,9 +95,11 @@ begin
 			
 			optic_in_prev <= optic_in;
 			
-			if (fail_cnt = "11111") then
+			if (fail_cnt > 31) then
 				no_link <= '1';
 			end if;
+			-- end connection lost detect
+			
 			
 			if (no_link = '0') then
 				if ((latch_rx_prev /= latch_rx) and (latch_rx = '1')) then
@@ -110,9 +114,9 @@ begin
 							crc_error <= '0';
 							
 							s(2) <= shift_reg(5); -- get enable value			
-							s(1) <= shift_reg(6+CONV_INTEGER(axis_sel)); --dir
-							s(0) <= shift_reg(9+CONV_INTEGER(axis_sel)); --step
-							--shift_reg(2+CONV_INTEGER(axis_sel)) <= limit; -- write limit
+							s(1) <= shift_reg(6+CONV_INTEGER(axis_sel)); -- get dir
+							s(0) <= shift_reg(9+CONV_INTEGER(axis_sel)); -- get step
+							shift_reg(2+CONV_INTEGER(axis_sel)) <= limit; -- write limit
 							led_tx <= shift_reg(2+CONV_INTEGER(axis_sel)); -- read limit
 							
 							-- calculate new parity
@@ -134,55 +138,66 @@ begin
 				
 				latch_rx_prev <= latch_rx;
 				
-				case tx_output is
-						
-					when "00" =>
-						case optic_cnt(3 downto 2) is
-							when "00" =>
-								optic_out <= '1';
-							when "01" =>
-								optic_out <= '1';	
-							when "10" =>
-								optic_out <= '0';	
-							when others =>
-								optic_out <= '0';
-						end case;
-							
-					when "01" =>
-						case optic_cnt(3 downto 2) is
-							when "00" =>
-								optic_out <= '0';
-							when "01" =>
-								optic_out <= '1';	
-							when "10" =>
-								optic_out <= '0';	
-							when others =>
-								optic_out <= '1';
-						end case;				
-							
-					when others =>
-						case optic_cnt(3 downto 2) is
-							when "00" =>
-								optic_out <= '1';
-							when "01" =>
-								optic_out <= '1';	
-							when "10" =>
-								optic_out <= '1';	
-							when others =>
-								optic_out <= '1';
-							end case;
+				case tx_output is	
+				when "00" =>
+					case optic_cnt(4 downto 2) is
+						when "000" =>
+							optic_out <= '1';
+						when "001" =>
+							optic_out <= '1';	
+						when "010" =>
+							optic_out <= '0';	
+						when "011" =>
+							optic_out <= '0';	
+						when "100" =>
+							optic_out <= '1';	
+						when others =>
+							optic_out <= '0';
+					end case;
+					
+				when "01" =>
+					case optic_cnt(4 downto 2) is
+						when "000" =>
+							optic_out <= '1';
+						when "001" =>
+							optic_out <= '0';	
+						when "010" =>
+							optic_out <= '1';	
+						when "011" =>
+							optic_out <= '0';	
+						when "100" =>
+							optic_out <= '1';	
+						when others =>
+							optic_out <= '0';
+					end case;
+				
+				when others => -- DEL
+					case optic_cnt(4 downto 2) is
+						when "000" =>
+							optic_out <= '1';
+						when "001" =>
+							optic_out <= '1';	
+						when "010" =>
+							optic_out <= '1';	
+						when "011" =>
+							optic_out <= '0';	
+						when "100" =>
+							optic_out <= '0';	
+						when others =>
+							optic_out <= '0';
+					end case;
 				end case;
 				
-				else
-					optic_out <= '0';
-					latch_rx_prev <= '0';
-					--shift_reg <= "000000010000";
-					--parity <= '1';
-					optic_cnt <= (others => '0');
-	            tx_output <= (others => '0');
-	            crc_error <= '1';
-				end if;
+			else
+				optic_out <= '0';
+				latch_rx_prev <= '0';
+				shift_reg <= "000000010000";
+				parity <= '1';
+				optic_cnt <= (others => '0');
+				tx_output <= (others => '0');
+				crc_error <= '1';
 			end if;
+		end if;
 	end process;
 	
 end Behavioral;
