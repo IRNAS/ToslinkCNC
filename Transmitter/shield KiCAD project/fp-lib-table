@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name VQFP44)(type KiCad)(uri "$(KIPRJMOD)\\VQFP44.pretty")(options "")(descr ""))
+  (lib (name OPENHARDWARE)(type Legacy)(uri "$(KIPRJMOD)\\OPENHARDWARE.mod")(options "")(descr ""))
+)
