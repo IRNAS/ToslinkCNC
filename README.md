@@ -36,6 +36,9 @@ For each motor on the CNC machine there is one PCB, containing Toslink receiver.
 
  * There is currently not enough room on the CPLD to hold both, the transmitter and the receiver. To enable transfer of limit switch signals from receivers back to transmitter, there would also need to be an additional optical receiver implemented on the transmitter PCB's CPLD.
 
+##Buy
+You can order ToslinkCNC KIT from our partner company [Fabrikor](http://fabrikor.eu/index.php?route=product/category&path=60). 
+
 ---
 
 #### License
