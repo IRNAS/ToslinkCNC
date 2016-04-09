@@ -6,7 +6,7 @@ use IEEE.std_logic_unsigned.all;
 entity manchester_decoder is
 	port(
 			iCLK : in std_logic;
-			no_link : in std_logic;
+			no_link_out : out std_logic;
 		   optic_in : in std_logic;
 			irq_out : out std_logic;
 			decoded_out : out std_logic_vector(1 downto 0)
@@ -25,8 +25,12 @@ architecture Behavioral of manchester_decoder is
 	signal step_cnt : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	signal prev_step : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	signal output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	
+	signal no_link : std_logic := '0';
 
 begin
+
+	no_link_out <= no_link;
 
 	input_low_pass:process (iCLK)
 	begin
@@ -45,15 +49,10 @@ begin
 		if (iCLK'event and iCLK = '1') then
       
 			irq_out <= '0';
-		
-			if (no_link = '1') then
 			
-				sampling_cnt <= (others => '0');
-				step_cnt <= (others => '0');
-				prev_step <= (others => '0');
-				output <= (others => '0');
-				
-			elsif (samp2 /= samp and samp = '1') then
+			if (samp2 /= samp and samp = '1') then
+			
+				no_link <= '0';
 			
 				if (sampling_cnt > 19) then -- if long step
 					step_cnt <= (others => '0');
@@ -88,14 +87,15 @@ begin
 				sampling_cnt <= (others => '0');
 				
 			else
---				if (sampling_cnt = 31) then
---					sampling_cnt <= (others => '0');
---					step_cnt <= (others => '0');
---					prev_step <= (others => '0');
---					output <= (others => '0');
---				else
+				if (sampling_cnt = 31) then
+					sampling_cnt <= (others => '0');
+					step_cnt <= (others => '0');
+					prev_step <= (others => '0');
+					output <= (others => '0');
+					no_link <= '1';
+				else
 					sampling_cnt <= sampling_cnt + 1;
---				end if;
+				end if;
 			end if;
 		
 			samp2 <= samp;

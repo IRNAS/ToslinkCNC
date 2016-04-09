@@ -24,7 +24,7 @@ architecture Behavioral of optic_receiver is
 	component manchester_decoder is
 		port(
 		      iCLK : in std_logic;
-				no_link : in std_logic;
+				no_link_out : out std_logic;
 				optic_in : in std_logic;
 				irq_out : out std_logic;
 				decoded_out : out std_logic_vector(1 downto 0)
@@ -60,9 +60,6 @@ architecture Behavioral of optic_receiver is
 	signal tx_output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	
 	signal crc_error : std_logic := '0';
-	
-	signal fail_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
-	signal optic_in_prev : std_logic := '0';
 	signal no_link : std_logic := '0';
 	
 begin
@@ -75,7 +72,7 @@ begin
 	decoder:manchester_decoder
 		 Port map ( 
 						iCLK => iCLK,
-						no_link => no_link,
+						no_link_out => no_link,
 						optic_in => optic_in,
 						irq_out => latch_rx,
 						decoded_out => rx_input
@@ -84,22 +81,6 @@ begin
 	shift_register:process (iCLK)
 	begin
 		if (iCLK'event and iCLK = '1') then
-			
-			-- connection lost detect
-			if (optic_in = optic_in_prev) then
-				fail_cnt <= fail_cnt + 1;
-			else
-				fail_cnt <= (others => '0');
-				no_link <= '0';
-			end if;
-			
-			optic_in_prev <= optic_in;
-			
-			if (fail_cnt > 31) then
-				no_link <= '1';
-			end if;
-			-- end connection lost detect
-			
 			
 			if (no_link = '0') then
 				if ((latch_rx_prev /= latch_rx) and (latch_rx = '1')) then
