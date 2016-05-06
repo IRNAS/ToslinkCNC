@@ -58,7 +58,7 @@ architecture Behavioral of main_transmitter is
 begin
 
 	fiber_out1 <= fiber_out;
-	fiber_out2 <= fiber_out;
+	fiber_out2 <= limit_in(0);
 	fiber_out3 <= fiber_out;
 		
 	in_step_x <= parallel_in(0);
