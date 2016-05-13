@@ -18,8 +18,6 @@ ToslinkCNC has been developed for use with [GoodenoughCNC Plasma](http://goodeno
 
 Transmitter consists of two PCBs, an Arduino sield and a Toslink transciever. Both PCBs are stacked together. Toslink transciever PCB is identical to one used for receiver. Arduino shield consists of headers for Arduino, connectors for [CNC USB Controller Mk3/4 from Planet CNC](http://www.planet-cnc.com/index.php?page=hardware). There is also a terminal block for connecting limit switch and trigger signals. Circuit can be powered through terminal block (+5V), through Arduino Uno if attached as a shield, or from Planet CNC Controller.
 
-![toslink-cnc-1](images/transmitter-pinout.jpg)
-
 ## Toslink Transmitter / Arduino Shield
 
 ![toslink-cnc-2](images/toslink-arduino-1.jpg)
