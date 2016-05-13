@@ -16,8 +16,13 @@ $CMP DRV8825_carrier
 D stepper motor driver carrier DRV8825
 $ENDCMP
 #
-$CMP SWITCHER_24V_TO_5V
-D adjustable switching power supply
+$CMP H11L1S-M
+D Optocoupler
+$ENDCMP
+#
+$CMP PoStep25-32_connector
+D PoStep25-32 Connector
+K IDC10 Male Connector
 $ENDCMP
 #
 $CMP TLV1117
@@ -26,10 +31,6 @@ $ENDCMP
 #
 $CMP XC9572XL
 D Xilinx CPLD
-$ENDCMP
-#
-$CMP motor_driver_carrier
-D stepper motor driver carrier DRV8825
 $ENDCMP
 #
 $CMP term_block

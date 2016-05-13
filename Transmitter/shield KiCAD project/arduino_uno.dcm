@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ARDUINO_UNO
+D Arduino UNO footprint.
+K arduino uno
+$ENDCMP
+#
+#End Doc Library

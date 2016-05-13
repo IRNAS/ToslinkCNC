@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP RSR010N10FHATL
+D RSR010N10FHATL  MOSFET Transistor, AEC-Q101, N Channel, 1 A, 100 V, 0.37 ohm, 10 V, 2.5 V
+K N-Channel MOSFET
+$ENDCMP
+#
+#End Doc Library

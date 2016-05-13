@@ -1,4 +1,4 @@
-update=2.3.2016 10:07:44
+update=13.4.2016 14:56:30
 version=1
 last_client=kicad
 [pcbnew]
@@ -60,10 +60,14 @@ LibName28=contrib
 LibName29=valves
 LibName30=xc9572xl
 LibName31=sw_dip
+LibName32=solder_bridge
+LibName33=tlp2704
+LibName34=rsr010n10fhatl
+LibName35=rpi_header
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=../
+PlotDirectoryName=
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=

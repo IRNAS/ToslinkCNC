@@ -1,24 +1,26 @@
-NET "iCLK"  LOC = "p1"  ;
+NET "iCLK"  LOC = "p44"  ;
 
-NET "fiber_out1"  LOC = "p6"  ; #TX1
-NET "fiber_out2"  LOC = "p7"  ; #TX2
-NET "fiber_out3"  LOC = "p8"  ; #TX3
+NET "fiber_out1"  LOC = "p32"  ; #TX1
+NET "fiber_out2"  LOC = "p34"  ; #TX2
+#NET "fiber_in"  LOC = "p33"  ; #RX
 
-#NET "limit_out<0>"  LOC = "p21"  ; #limit X
+#NET "limit_out<0>"  LOC = "p38"  ; #limit X
 #NET "limit_out<1>"  LOC = "p22"  ; #limit Y
-#NET "limit_out<2>"  LOC = "p23"  ; #limit Z
+#NET "limit_out<2>"  LOC = "p41"  ; #limit Z
 
-NET "limit_in<0>"  LOC = "p27"  ; #in X
-NET "limit_in<1>"  LOC = "p28"  ; #in Y
-NET "limit_in<2>"  LOC = "p42"  ; #in Z
+NET "limit_in<0>"  LOC = "p37"  ; #trigger 1
+NET "limit_in<1>"  LOC = "p20"  ; #trigger 2
+NET "limit_in<2>"  LOC = "p21"  ; #trigger 2
 
-NET "parallel_in<0>" LOC = "p12"  ; #step X
-NET "parallel_in<1>" LOC = "p16"  ; #dir X
-NET "parallel_in<2>" LOC = "p13"  ; #step Y
+NET "parallel_in<0>" LOC = "p2"  ; #step X
+NET "parallel_in<1>" LOC = "p12"  ; #dir X
+NET "parallel_in<2>" LOC = "p14"  ; #step Y
 NET "parallel_in<3>" LOC = "p18"  ; #dir Y
-NET "parallel_in<4>" LOC = "p14"  ; #step Z
+NET "parallel_in<4>" LOC = "p13"  ; #step Z
 NET "parallel_in<5>" LOC = "p19"  ; #dir Z
-NET "parallel_in<6>" LOC = "p20"  ; #enable
+NET "parallel_in<6>" LOC = "p5"  ; #enable
+
+NET "led_enable" LOC = "p43"  ; #enable LED
 
 NET "iCLK" TNM_NET = iCLK;
 timespec TS_iCLK = PERIOD "iCLK" 20 ns HIGH 50%;

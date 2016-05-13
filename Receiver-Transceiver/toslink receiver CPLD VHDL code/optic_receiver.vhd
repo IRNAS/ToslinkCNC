@@ -12,10 +12,8 @@ entity optic_receiver is
 				optic_out : out std_logic;
 				s : OUT STD_LOGIC_VECTOR(2 downto 0);
 				led_error : out std_logic;
-				led_rx : out std_logic;
-				led_tx : out std_logic;
-				irq : out std_logic;
-				no_link_out: out std_logic
+				trigger_out : out std_logic;
+				irq : out std_logic
 			);
 end optic_receiver;
 
@@ -64,10 +62,7 @@ architecture Behavioral of optic_receiver is
 	
 begin
 	
-	no_link_out <= no_link;
-	
 	led_error <= crc_error;
-	led_rx <= latch_rx;
 	
 	decoder:manchester_decoder
 		 Port map ( 
@@ -79,6 +74,8 @@ begin
 					 );
 					  
 	shift_register:process (iCLK)
+		variable new_parity : std_logic := '0';
+		variable tmp : integer := 0;
 	begin
 		if (iCLK'event and iCLK = '1') then
 			
@@ -94,15 +91,17 @@ begin
 						
 							crc_error <= '0';
 							
-							s(2) <= shift_reg(5); -- get enable value			
+							s(2) <= shift_reg(5) or no_link; -- get enable value			
 							s(1) <= shift_reg(6+CONV_INTEGER(axis_sel)); -- get dir
 							s(0) <= shift_reg(9+CONV_INTEGER(axis_sel)); -- get step
-							shift_reg(2+CONV_INTEGER(axis_sel)) <= limit; -- write limit
-							led_tx <= shift_reg(2+CONV_INTEGER(axis_sel)); -- read limit
+							tmp := 2+CONV_INTEGER(axis_sel);
+							shift_reg(tmp) <= limit; -- write limit
+							trigger_out <= shift_reg(tmp) and (not no_link); -- read limit
 							
 							-- calculate new parity
-							shift_reg(1) <= parity xor (shift_reg(2+CONV_INTEGER(axis_sel)) xor limit);
-							shift_reg(0) <= not (parity xor (shift_reg(2+CONV_INTEGER(axis_sel)) xor limit));
+							new_parity := parity xor (shift_reg(tmp) xor limit);
+							shift_reg(1) <= new_parity;
+							shift_reg(0) <= not new_parity;
 							
 							irq <= '1';
 						end if;

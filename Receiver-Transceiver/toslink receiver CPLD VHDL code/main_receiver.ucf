@@ -1,24 +1,26 @@
-NET "iCLK"  LOC = "p1"  ;
+NET "iCLK"  LOC = "p44"  ;
 
-NET "fiber_out1"  LOC = "p23"  ; #TX1
+NET "fiber_out1"  LOC = "p32"  ; #TX1
 NET "fiber_out2"  LOC = "p34"  ; #TX2
 NET "fiber_in"  LOC = "p33"  ; #RX
 
-NET "limit"  LOC = "p19"  ; #limit
-#NET "error" LOC = "p3" ; #driver error
+NET "limit"  LOC = "p38"  ; #limit
+NET "trigger"  LOC = "p37"  ; #trigger
+#NET "error" LOC = "p1" ; #driver error
 
-NET "axis_sel<0>" LOC = "p16" ; #axis select 3
-NET "axis_sel<1>" LOC = "p13" ; #axis select 2
-NET "axis_sel<2>" LOC = "p14" ; #axis select 1
+NET "axis_sel<0>" LOC = "p8" ; #axis select 3
+NET "axis_sel<1>" LOC = "p7" ; #axis select 2
+NET "axis_sel<2>" LOC = "p6" ; #axis select 1
 
-NET "parallel_out<0>" LOC = "p7"  ; #step
-NET "parallel_out<1>" LOC = "p8"  ; #dir
-NET "parallel_out<2>" LOC = "p2"  ; #enable
+NET "parallel_out<0>" LOC = "p2"  ; #step
+NET "parallel_out<1>" LOC = "p3"  ; #dir
+NET "parallel_out<2>" LOC = "p5"  ; #enable
 
-NET "led_error" LOC = "p12" ; #error LED
-NET "led_rx" LOC = "p20" ; #rx LED
-NET "led_tx1" LOC = "p21" ; #tx1 LED
-NET "led_tx2" LOC = "p22" ; #tx2 LED
+NET "dir_output" LOC = "p12"  ; #dir output
+NET "limit_output" LOC = "p23"  ; #limit output
+
+NET "led_error" LOC = "p42" ; #error LED
+NET "led_enable" LOC = "p43" ; #enable LED
 
 NET "iCLK" TNM_NET = iCLK;
 timespec TS_iCLK = PERIOD "iCLK" 20 ns HIGH 50%;

@@ -32,15 +32,15 @@ begin
 
 	no_link_out <= no_link;
 
-	input_low_pass:process (iCLK)
-	begin
-		if (iCLK'event and iCLK = '1') then
-			if(q1 = optic_in)then
+	--input_low_pass:process (iCLK)
+	--begin
+		--if (iCLK'event and iCLK = '1') then
+			--if(q1 = optic_in)then
 				samp <= q1;
-			end if;
+			--end if;
 			q1 <= optic_in;
-		end if;
-	end process;
+		--end if;
+	--end process;
 	
 	decoded_out <= output;
 	
