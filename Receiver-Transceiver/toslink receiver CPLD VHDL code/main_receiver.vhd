@@ -31,14 +31,15 @@ architecture Behavioral of main_receiver is
 				optic_out : out std_logic;
 				s : OUT STD_LOGIC_VECTOR(2 downto 0);
 				led_error : out std_logic;
-				trigger_out : out std_logic;
-				irq : out std_logic
+				led_tx : out std_logic;
+				irq : out std_logic;
+				no_link_out: out std_logic
 			 );
 	END COMPONENT;
 	
 	signal fiber_out : std_logic := '0';
 	
-	signal trigger_out : std_logic := '0';
+	signal led_tx : std_logic := '0';
 	
 	signal s:std_logic_vector(2 downto 0) := "100";
 	
@@ -54,6 +55,12 @@ architecture Behavioral of main_receiver is
 	signal counter:std_logic_vector (9 downto 0) := (others => '0');
 	
 	signal irq:std_logic := '0';
+	
+	signal led_error_intern:std_logic := '0';
+	
+	signal no_link:std_logic := '0';
+	
+	signal limit_clean:std_logic := '0';
 
 begin
 
@@ -62,29 +69,34 @@ begin
 						  iCLK => iCLK,
 						  axis_sel => axis_sel,
 						  optic_in => fiber_in,
-						  limit => limit,
+						  limit => limit_clean,
 						  optic_out => fiber_out,
 						  s => s,
-						  led_error => led_error,
-						  trigger_out => trigger_out,
-						  irq => irq
+						  led_error => led_error_intern,
+						  led_tx => led_tx,
+						  irq => irq,
+						  no_link_out => no_link
 					  );
 	
 	fiber_out1 <= fiber_in;
 	fiber_out2 <= fiber_in;
 	
-	led_enable <= not out_enable;
-	
-	trigger <= trigger_out;
-	
 	dir_output <= out_dir;
 	limit_output <= limit;
+	
+	led_enable <= not (out_enable or no_link);
+	
+	trigger <= (led_tx and (not no_link));
+	
+	led_error <= led_error_intern;
 	
 	parallel_out <= (
 							0 => out_step,
 							1 => out_dir,
-							2 => out_enable
+							2 => (out_enable or no_link)
 						 );
+	
+	limit_clean <= limit;
 	
 	step_generator:process (iCLK)
 	begin

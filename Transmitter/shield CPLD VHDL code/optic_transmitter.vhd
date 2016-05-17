@@ -36,7 +36,7 @@ architecture Behavioral of optic_transmitter is
 	signal tx_output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	signal optic_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 	signal bit_cnt : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
-	--signal start_of_frame : STD_LOGIC := '0';
+	signal start_of_frame : STD_LOGIC := '0';
 
 begin
 					  
@@ -50,12 +50,12 @@ begin
 					shift_reg <= s(9 downto 0)&odd_parity(s(9 downto 0))&(not odd_parity(s(9 downto 0)));
 					bit_cnt <= (others => '0');
 					tx_output <= "10"; -- generate del on output
-					--start_of_frame <= '1';
+					start_of_frame <= '1';
 				else
 					shift_reg <= shift_reg(10 downto 0)&'0'; -- shift for one bit and add '0'
 					tx_output <= (1 => '0')&shift_reg(11); -- output one bit
 					bit_cnt <= bit_cnt + 1;
-					--start_of_frame <= '0';
+					start_of_frame <= '0';
 				end if;
 				
 				optic_cnt <= optic_cnt + 1;
@@ -63,7 +63,7 @@ begin
 				optic_cnt <= (others => '0');
          else
 				optic_cnt <= optic_cnt + 1;
-				--start_of_frame <= '0';
+				start_of_frame <= '0';
 			end if;
 			
 			case tx_output is	

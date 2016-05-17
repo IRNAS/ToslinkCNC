@@ -10,7 +10,7 @@ entity main_transmitter is
 			  limit_in : STD_LOGIC_VECTOR (2 downto 0);
            fiber_out1 : out  STD_LOGIC;
 			  fiber_out2 : out  STD_LOGIC;
-			  led_enable : out  STD_LOGIC
+			  led_enable : out  std_logic
   			);
 end main_transmitter;
 
@@ -58,7 +58,9 @@ architecture Behavioral of main_transmitter is
 begin
 
 	fiber_out1 <= fiber_out;
-	fiber_out2 <= fiber_out;
+	fiber_out2 <= limit_in(0);
+	
+	led_enable <= not out_enable;
 		
 	in_step_x <= parallel_in(0);
 	in_dir_x <= parallel_in(1);
@@ -67,8 +69,6 @@ begin
 	in_step_z <= parallel_in(4);
 	in_dir_z <= parallel_in(5);
 	in_enable <= parallel_in(6);
-	
-	led_enable <= not out_enable;
 
 	optic_transmitter_inst:optic_transmitter
 		 Port map (
