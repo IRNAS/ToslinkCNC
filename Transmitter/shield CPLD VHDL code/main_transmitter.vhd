@@ -7,7 +7,7 @@ entity main_transmitter is
     Port ( 
 	        iCLK : in  STD_LOGIC;
            parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
-			  limit_in : STD_LOGIC_VECTOR (2 downto 0);
+			  trigger_in : STD_LOGIC_VECTOR (2 downto 0);
            fiber_out1 : out  STD_LOGIC;
 			  fiber_out2 : out  STD_LOGIC;
 			  led_enable : out  std_logic
@@ -51,14 +51,14 @@ architecture Behavioral of main_transmitter is
 	
 	signal delay_cnt : std_logic_vector(8 downto 0) := (others => '0');
 	
-	signal out_x : std_logic := '0';
-	signal out_y : std_logic := '0';
-	signal out_z : std_logic := '0';
+	signal trigger_out1 : std_logic := '0';
+	signal trigger_out2 : std_logic := '0';
+	signal trigger_out3 : std_logic := '0';
 
 begin
 
 	fiber_out1 <= fiber_out;
-	fiber_out2 <= limit_in(0);
+	fiber_out2 <= trigger_in(0);
 	
 	led_enable <= not out_enable;
 		
@@ -123,14 +123,14 @@ begin
 			end if;
 			
 			out_enable <= in_enable;
-			out_x <= limit_in(0);
-			out_y <= limit_in(1);
-			out_z <= limit_in(2);
+			trigger_out1 <= trigger_in(0);
+			trigger_out2 <= trigger_in(1);
+			trigger_out3 <= trigger_in(2);
 			
 			transmitt_reg <= ( -- send packet
-					   0=>out_x,
-					   1=>out_y,
-					   2=>out_z,
+					   0=>trigger_out1,
+					   1=>trigger_out2,
+					   2=>trigger_out3,
 					   3=>out_enable,
 						4=>out_dir_x,
 						5=>out_dir_y,

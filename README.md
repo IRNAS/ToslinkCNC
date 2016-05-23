@@ -39,6 +39,10 @@ Transmitter consists of two PCBs, an Arduino sield and a Toslink transciever. Bo
 ![toslink-cnc-7](images/toslink-raspberry-pi-1.jpg)
 ![toslink-cnc-8](images/toslink-raspberry-pi-2.jpg)
 
+## Firmware Description
+
+
+
 ##Known Isues
 
  * There is currently not enough room on the CPLD to hold both, the transmitter and the receiver. To enable transfer of limit switch signals from receivers back to transmitter, there would also need to be an additional optical receiver implemented on the transmitter PCB's CPLD.

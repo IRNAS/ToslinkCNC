@@ -12,10 +12,8 @@ entity optic_receiver is
 				optic_out : out std_logic;
 				s : OUT STD_LOGIC_VECTOR(2 downto 0);
 				led_error : out std_logic;
-				led_rx : out std_logic;
-				led_tx : out std_logic;
-				irq : out std_logic;
-				no_link_out: out std_logic
+				trigger : out std_logic;
+				irq : out std_logic
 			);
 end optic_receiver;
 
@@ -24,7 +22,7 @@ architecture Behavioral of optic_receiver is
 	component manchester_decoder is
 		port(
 		      iCLK : in std_logic;
-				no_link_out : out std_logic;
+				no_link : out std_logic;
 				optic_in : in std_logic;
 				irq_out : out std_logic;
 				decoded_out : out std_logic_vector(1 downto 0)
@@ -39,15 +37,6 @@ architecture Behavioral of optic_receiver is
 	  end loop; -- works for any size X
 	  return TMP;
 	end odd_parity;
-	
-	function reg_and (X : std_logic_vector) return std_logic is
-		variable TMP : std_logic := '0';
-	begin
-	  for J in X'range loop
-		 TMP := TMP and X(J);
-	  end loop; -- works for any size X
-	  return TMP;
-	end reg_and;
 
 	signal rx_input : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	signal latch_rx : std_logic := '0';
@@ -64,15 +53,12 @@ architecture Behavioral of optic_receiver is
 	
 begin
 	
-	no_link_out <= no_link;
-	
 	led_error <= crc_error;
-	led_rx <= latch_rx;
 	
 	decoder:manchester_decoder
 		 Port map ( 
 						iCLK => iCLK,
-						no_link_out => no_link,
+						no_link => no_link,
 						optic_in => optic_in,
 						irq_out => latch_rx,
 						decoded_out => rx_input
@@ -98,7 +84,7 @@ begin
 							s(1) <= shift_reg(6+CONV_INTEGER(axis_sel)); -- get dir
 							s(0) <= shift_reg(9+CONV_INTEGER(axis_sel)); -- get step
 							shift_reg(2+CONV_INTEGER(axis_sel)) <= limit; -- write limit
-							led_tx <= shift_reg(2+CONV_INTEGER(axis_sel)); -- read limit
+							trigger <= shift_reg(2+CONV_INTEGER(axis_sel)); -- read trigger
 							
 							-- calculate new parity
 							shift_reg(1) <= parity xor (shift_reg(2+CONV_INTEGER(axis_sel)) xor limit);
@@ -170,6 +156,8 @@ begin
 				end case;
 				
 			else
+				s <= "111";
+				trigger <= '0';
 				optic_out <= '0';
 				latch_rx_prev <= '0';
 				shift_reg <= "000000010000";

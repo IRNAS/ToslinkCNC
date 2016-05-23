@@ -6,7 +6,7 @@ use IEEE.std_logic_unsigned.all;
 entity manchester_decoder is
 	port(
 			iCLK : in std_logic;
-			no_link_out : out std_logic;
+			no_link : out std_logic;
 		   optic_in : in std_logic;
 			irq_out : out std_logic;
 			decoded_out : out std_logic_vector(1 downto 0)
@@ -25,12 +25,8 @@ architecture Behavioral of manchester_decoder is
 	signal step_cnt : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	signal prev_step : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
 	signal output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
-	
-	signal no_link : std_logic := '0';
 
 begin
-
-	no_link_out <= no_link;
 
 	input_low_pass:process (iCLK)
 	begin
