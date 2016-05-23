@@ -45,9 +45,25 @@ All data is being transmitted in frames of fixed length. Frames are transmitted 
 
 ![frame-structure](images/packet_strucutre.png)
 
-Data in optical fiber is manchester encoded. For logic '0', logic '1' and frame delimiter three different patterns are being used. They were selected so that all of them have the same length and are completely different from each other. To ensure that receiver correctly decodes the patters, the shortest distance between two rising edges should be at least 8 clock cycles. There are three possible pulse widths: 4, 8 and 12.
+Data in optical fiber is manchester encoded. For logic '0', logic '1' and frame delimiter three different patterns are being used. They were selected so that all of them have the same length and are completely different from each other. To ensure that receiver correctly decodes the patters, the shortest distance between two rising edges should be at least 8 clock cycles. There are three possible pulse widths: 4, 8 and 12 cycles.
 
 ![symbol-shape](images/symbol_shape.png)
+
+Main transmitter module consists of a step sampler and an optical transmitter. Step sampler samples and shapes incomming step, direction, enable and trigger signals and passes them foward to the optical transmitter. Optical transmitter handles data framing, manchester encoding and sends encoded data to Toslink transmitter.
+
+![main-transmitter-module](images/main_transmitter_schematic.png)
+
+Block diagram of step sampler is presented below:
+
+![step-sampler](images/step_sampler.png)
+
+Optical transmitter consists of shift register and manchester encoder. Shift register block diagram is presented below:
+
+![shift-register-tx](images/shift_register_transmitter.png)
+
+Manchester encoder consists of three look-up tables and one multiplexer. If value of *tx_output* is "00" the '0' pattern, if  "01" the '1' pattern and if "10" the DEL pattern is generated on the output.
+
+![manchester-encoder](images/manchester_generator.png)
 
 ##Known Isues
 
