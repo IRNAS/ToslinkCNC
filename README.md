@@ -53,17 +53,33 @@ Main transmitter module consists of a step sampler and an optical transmitter. S
 
 ![main-transmitter-module](images/main_transmitter_schematic.png)
 
-Block diagram of step sampler is presented below:
+Block diagram of step sampler is presented in figure below:
 
 ![step-sampler](images/step_sampler.png)
 
-Optical transmitter consists of shift register and manchester encoder. Shift register block diagram is presented below:
+Optical transmitter consists of shift register and manchester encoder. Shift register block diagram is presented in figure below:
 
 ![shift-register-tx](images/shift_register_transmitter.png)
 
 Manchester encoder consists of three look-up tables and one multiplexer. If value of *tx_output* is "00" the '0' pattern, if  "01" the '1' pattern and if "10" the DEL pattern is generated on the output.
 
 ![manchester-encoder](images/manchester_generator.png)
+
+Main receiver module consists of an optical receiver and a step generator. Optical receiver accepts signal from Toslink receiver, decodes it and passes extracted data to step generator. It also adds limit signal values, calculates new parity,   manchester encodes data and passes it foward to both Tolsink transmitters. Step generator correctly shapes the received signals.
+
+![main-receiver-module](images/main_receiver_schematic.png)
+
+Optical receiver consists of manchester decoder, shift register and manchester encoder (which is identical to the one used in transmitter). Block diagram of receiver shift register is presented in figure below:
+
+![shift-register-rx](images/shift_register_receiver.png)
+
+Manchester decoder consists of a simple low-pass filter and a step sampler.
+
+![manchester-decoder](images/manchester_decoder.png)
+
+Step sampler is a finite state machine. It's diagram of possible states is presented in figure below. Movement between states is based on received step width. Short equals to 4, medium to 8 and long to 12 clock cycles. If step width is too long, the connection lost and all motor drivers are disabled (enable signal equals '1').
+
+![manchester-decoder-state-machine](images/manchester_decoder_state_machine.png)
 
 ##Known Isues
 
