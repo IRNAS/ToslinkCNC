@@ -83,7 +83,7 @@ begin
 				sampling_cnt <= (others => '0');
 				
 			else
-				if (sampling_cnt = 31) then
+				if (sampling_cnt = 31) then -- if connection lost
 					sampling_cnt <= (others => '0');
 					step_cnt <= (others => '0');
 					prev_step <= (others => '0');

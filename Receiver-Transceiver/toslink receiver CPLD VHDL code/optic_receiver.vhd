@@ -4,29 +4,29 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.std_logic_unsigned.all;
 
 entity optic_receiver is
-    Port ( 
-			   iCLK : IN std_logic; 
-			   axis_sel : in std_logic_vector(2 downto 0);
-				optic_in : IN std_logic;
-				limit : in std_logic;
-				optic_out : out std_logic;
-				s : OUT STD_LOGIC_VECTOR(2 downto 0);
-				led_error : out std_logic;
-				trigger : out std_logic;
-				irq : out std_logic
-			);
+    Port( 
+			iCLK : IN std_logic; 
+			axis_sel : in std_logic_vector(2 downto 0);
+			optic_in : IN std_logic;
+	     	limit : in std_logic;
+		    optic_out : out std_logic;
+			s : OUT STD_LOGIC_VECTOR(2 downto 0);
+			led_error : out std_logic;
+			trigger : out std_logic;
+			irq : out std_logic
+		);
 end optic_receiver;
 
 architecture Behavioral of optic_receiver is
 
 	component manchester_decoder is
 		port(
-		      iCLK : in std_logic;
+		        iCLK : in std_logic;
 				no_link : out std_logic;
 				optic_in : in std_logic;
 				irq_out : out std_logic;
 				decoded_out : out std_logic_vector(1 downto 0)
-			 );	
+			);	
    end component;
 
 	function odd_parity (X : std_logic_vector) return std_logic is
@@ -57,12 +57,12 @@ begin
 	
 	decoder:manchester_decoder
 		 Port map ( 
-						iCLK => iCLK,
-						no_link => no_link,
-						optic_in => optic_in,
-						irq_out => latch_rx,
-						decoded_out => rx_input
-					 );
+					iCLK => iCLK,
+					no_link => no_link,
+					optic_in => optic_in,
+					irq_out => latch_rx,
+					decoded_out => rx_input
+				  );
 					  
 	shift_register:process (iCLK)
 	begin
@@ -106,7 +106,7 @@ begin
 				latch_rx_prev <= latch_rx;
 				
 				case tx_output is	
-				when "00" =>
+				when "00" => -- '0'
 					case optic_cnt(4 downto 2) is
 						when "000" =>
 							optic_out <= '1';
@@ -124,7 +124,7 @@ begin
 					
 				when "01" =>
 					case optic_cnt(4 downto 2) is
-						when "000" =>
+						when "000" => -- '1'
 							optic_out <= '1';
 						when "001" =>
 							optic_out <= '0';	
@@ -155,8 +155,8 @@ begin
 					end case;
 				end case;
 				
-			else
-				s <= "111";
+			else -- if connection lost
+				s <= "100";
 				trigger <= '0';
 				optic_out <= '0';
 				latch_rx_prev <= '0';

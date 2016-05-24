@@ -797,9 +797,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="67.931957"
-     inkscape:cy="468.41354"
+     inkscape:zoom="0.7"
+     inkscape:cx="320.02479"
+     inkscape:cy="582.69925"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -2168,5 +2168,23 @@
          id="tspan20737-7"
          x="406.75781"
          y="937.23303">LATCH</tspan></text>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.88599998;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4798"
+       width="620"
+       height="920"
+       x="60"
+       y="52.362206" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:25px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="275.91431"
+       y="93.790779"
+       id="text4800"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4802"
+         x="275.91431"
+         y="93.790779">STEP SAMPLER</tspan></text>
   </g>
 </svg>

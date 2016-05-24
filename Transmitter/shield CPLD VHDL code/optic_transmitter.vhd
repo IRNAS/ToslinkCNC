@@ -44,12 +44,12 @@ begin
 	begin
 		if (iCLK'event and iCLK = '1') then
 			
-			if (optic_cnt = 0) then -- start of bit
+			if (optic_cnt = 0) then -- start of bit pattern
 			
-				if (bit_cnt = 12) then -- packet generating
+				if (bit_cnt = 12) then -- frame generating
 					shift_reg <= s(9 downto 0)&odd_parity(s(9 downto 0))&(not odd_parity(s(9 downto 0)));
 					bit_cnt <= (others => '0');
-					tx_output <= "10"; -- generate del on output
+					tx_output <= "10"; -- generate DEL on output
 					--start_of_frame <= '1';
 				else
 					shift_reg <= shift_reg(10 downto 0)&'0'; -- shift for one bit and add '0'
@@ -67,7 +67,7 @@ begin
 			end if;
 			
 			case tx_output is	
-				when "00" =>
+				when "00" => -- '0'
 					case optic_cnt(4 downto 2) is
 						when "000" =>
 							optic_out <= '1';
@@ -83,7 +83,7 @@ begin
 							optic_out <= '0';
 					end case;
 					
-				when "01" =>
+				when "01" => -- '1'
 					case optic_cnt(4 downto 2) is
 						when "000" =>
 							optic_out <= '1';

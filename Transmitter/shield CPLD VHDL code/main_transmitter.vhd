@@ -6,11 +6,11 @@ use IEEE.std_logic_unsigned.all;
 entity main_transmitter is
     Port ( 
 	        iCLK : in  STD_LOGIC;
-           parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
-			  trigger_in : STD_LOGIC_VECTOR (2 downto 0);
-           fiber_out1 : out  STD_LOGIC;
-			  fiber_out2 : out  STD_LOGIC;
-			  led_enable : out  std_logic
+            parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
+			trigger_in : STD_LOGIC_VECTOR (2 downto 0);
+            fiber_out1 : out  STD_LOGIC;
+			fiber_out2 : out  STD_LOGIC;
+			led_enable : out  std_logic
   			);
 end main_transmitter;
 
@@ -127,7 +127,7 @@ begin
 			trigger_out2 <= trigger_in(1);
 			trigger_out3 <= trigger_in(2);
 			
-			transmitt_reg <= ( -- send packet
+			transmitt_reg <= ( -- send frame
 					   0=>trigger_out1,
 					   1=>trigger_out2,
 					   2=>trigger_out3,

@@ -43,15 +43,15 @@ Transmitter consists of two PCBs, an Arduino sield and a Toslink transciever. Bo
 
 All data is being transmitted in frames of fixed length. Frames are transmitted without gaps between them. Each frame contains 3 direction values, 3 step values, vaule of enable signal, 3 values of limit/end switch signals (these fields are being shared with 3 trigger values), parity bits and frame delimiter. To detect parity bit corruption, both even and odd parity bits are being transmitted. Transmitter places direction, step, enable and trigger values in new frame, adds calculated parity bits and sends the frame to the first receiver in daisy chain. Receiver reads the enable value and direction, step and trigger values ( based on axis selection). Receiver replaces the correspondig trigger value with limit switch value, calculates new parity bits and sends this new frame to the next receiver in dasy chain. Output of the last receiver in dasy chain is connected to transmitter input. Transmitter reads all three limit switch values from received frame.
 
-![frame-structure](images/packet_strucutre.png)
+![frame-structure](images/frame_structure.png)
 
-Data in optical fiber is manchester encoded. For logic '0', logic '1' and frame delimiter three different patterns are being used. They were selected so that all of them have the same length and are completely different from each other. To ensure that receiver correctly decodes the patters, the shortest distance between two rising edges should be at least 8 clock cycles. There are three possible pulse widths: 4, 8 and 12 cycles.
+Data in optical fiber is manchester encoded. For logic '0', logic '1' and frame delimiter three different patterns are being used. They were selected so that all of them have the same length and are completely different from each other. Decoding is based on time elapsed between two rising edges of clock. If elapsed time is shorter than 12 clock cycles, receiver decodes it as a short step. If it's longer than 12 and shorter than 20 clock cycles, then it's decoded as a medium step. If elapsed time is longer than 20 clock cycles, it's decoded as a long step.
 
-![symbol-shape](images/symbol_shape.png)
+![symbol-pattern](images/symbol_pattern.png)
 
-Main transmitter module consists of a step sampler and an optical transmitter. Step sampler samples and shapes incomming step, direction, enable and trigger signals and passes them foward to the optical transmitter. Optical transmitter handles data framing, manchester encoding and sends encoded data to Toslink transmitter.
+Main transmitter module consists of a step sampler and an optical transmitter. Step sampler samples and shapes incomming step, direction, enable and trigger signals and passes them forward to the optical transmitter. Optical transmitter handles data framing, manchester encoding and sends encoded data to Toslink transmitter.
 
-![main-transmitter-module](images/main_transmitter_schematic.png)
+![main-transmitter-module](images/main_transmitter.png)
 
 Block diagram of step sampler is presented in figure below:
 
@@ -59,25 +59,25 @@ Block diagram of step sampler is presented in figure below:
 
 Optical transmitter consists of shift register and manchester encoder. Shift register block diagram is presented in figure below:
 
-![shift-register-tx](images/shift_register_transmitter.png)
+![shift-register-tx](images/shift_register_tx.png)
 
 Manchester encoder consists of three look-up tables and one multiplexer. If value of *tx_output* is "00" the '0' pattern, if  "01" the '1' pattern and if "10" the DEL pattern is generated on the output.
 
 ![manchester-encoder](images/manchester_generator.png)
 
-Main receiver module consists of an optical receiver and a step generator. Optical receiver accepts signal from Toslink receiver, decodes it and passes extracted data to step generator. It also adds limit signal values, calculates new parity,   manchester encodes data and passes it foward to both Tolsink transmitters. Step generator correctly shapes the received signals.
+Main receiver module consists of an optical receiver and a step generator. Optical receiver accepts signal from Toslink receiver, decodes it and passes extracted data to step generator. It also adds limit signal values, calculates new parity, manchester encodes data and passes it foward to both Tolsink transmitters. Step generator correctly shapes the received signals.
 
-![main-receiver-module](images/main_receiver_schematic.png)
+![main-receiver-module](images/main_receiver.png)
 
 Optical receiver consists of manchester decoder, shift register and manchester encoder (which is identical to the one used in transmitter). Block diagram of receiver shift register is presented in figure below:
 
-![shift-register-rx](images/shift_register_receiver.png)
+![shift-register-rx](images/shift_register_rx.png)
 
 Manchester decoder consists of a simple low-pass filter and a step sampler.
 
 ![manchester-decoder](images/manchester_decoder.png)
 
-Step sampler is a finite state machine. It's diagram of possible states is presented in figure below. Movement between states is based on received step width. Short equals to 4, medium to 8 and long to 12 clock cycles. If step width is too long, the connection is lost and all motor drivers are disabled (enable signal equals '1').
+Step sampler is a finite state machine. It's diagram of possible states is presented in figure below. Movement between states is based on received step width: short, medium or long. If step width is too long, the connection is lost and motor driver is disabled (enable signal equals to '1').
 
 ![manchester-decoder-state-machine](images/manchester_decoder_state_machine.png)
 
