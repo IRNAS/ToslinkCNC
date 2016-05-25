@@ -21,7 +21,7 @@ For each motor on the CNC machine there is one PCB, containing Toslink receiver.
 
 ## Toslink Transmitter
 
-Transmitter consists of two PCBs, an Arduino sield and a Toslink transciever. Both PCBs are stacked together. Toslink transciever PCB is identical to one used for receiver. Arduino shield consists of headers for Arduino, connectors for [CNC USB Controller Mk3/4 from Planet CNC](http://www.planet-cnc.com/index.php?page=hardware). There is also a terminal block for connecting limit switch and trigger signals. Circuit can be powered through terminal block (+5V), through Arduino Uno if attached as a shield, or from Planet CNC Controller.
+Transmitter consists of two PCBs, an Arduino sield and a Toslink transciever. Both PCBs are stacked together. Toslink transciever PCB is identical to one used for receiver. Arduino shield consists of headers for Arduino and connectors for [CNC USB Controller Mk3/4 from Planet CNC](http://www.planet-cnc.com/index.php?page=hardware) and PoStep25-32 driver. There is also a terminal block for connecting limit switches and trigger signals. Circuit can be powered either through terminal block (+5V), through Arduino Uno if attached as a shield, or from Planet CNC Controller.
 
 ## Toslink Transmitter / Arduino Shield
 
