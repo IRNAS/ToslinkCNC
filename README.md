@@ -17,7 +17,10 @@ ToslinkCNC has been developed for use with [GoodenoughCNC Plasma](http://goodeno
 
 For each motor on the CNC machine there is one PCB, containing Toslink receiver. Receiver PCB, together with motor driver, can be mounted on the motor. Receiver is being used with [PoLabs' PoStep25-32 stepper motor driver](http://www.poscope.com/PoStep25-32). PCB is being powered through motor driver connector using +5V. To enable this the +5V supply from motor driver should be connected to unused 9th pin on the driver's IDC connector usign a piece of insulated wire. PCB consists of one CPLD, two optical transmitters, one optical receiver, one DIP switch for selecting the axis and one limit switch / trigger connector. Limit switch is insulated through an optocoupler and trigger output is open drain type. Toslink transmitter DLT1111 and Toslink receiver DLR1111 were used, which enable data transfer speed up to 16 Mbps. We used Xilinx XC9572XL CPLD to implement the necessary logic for protocol conversion. Receivers can also be connected in daisy chain.
 
+### Using IDC-10 connector:
 ![toslink-cnc-1](images/toslink-transceiver-diagram.png)
+
+### Using terminal blocks:
 ![toslink-cnc-1-1](images/toslink-receiver-2-diagram.png)
 
 ## Toslink Transmitter
