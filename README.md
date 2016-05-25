@@ -83,7 +83,7 @@ Manchester decoder consists of a simple low-pass filter and a step sampler.
 
 ![manchester-decoder](images/manchester_decoder.png)
 
-Step sampler is a finite state machine. It's diagram of possible states is presented in figure below. Movement between states is based on received step width: short, medium or long. If step width is too long, the connection is lost and motor driver is disabled (enable signal equals to '1').
+Step sampler is a finite state machine. It's diagram of possible states is presented in figure below. Movement between states is based on received step width: short, medium or long. If step width is too long, the connection is lost and motor driver is disabled (enable signal equals to '1'). As soon as the correct manchester symbol is received, the connection is again established.
 
 ![manchester-decoder-state-machine](images/manchester_decoder_state_machine.png)
 
