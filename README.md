@@ -17,11 +17,14 @@ ToslinkCNC has been developed for use with [GoodenoughCNC Plasma](http://goodeno
 
 For each motor on the CNC machine there is one PCB, containing Toslink receiver. Receiver PCB, together with motor driver, can be mounted on the motor. Receiver is being used with [PoLabs' PoStep25-32 stepper motor driver](http://www.poscope.com/PoStep25-32). PCB is being powered through motor driver connector using +5V. To enable this the +5V supply from motor driver should be connected to unused 9th pin on the driver's IDC connector usign a piece of insulated wire. PCB consists of one CPLD, two optical transmitters, one optical receiver, one DIP switch for selecting the axis and one limit switch / trigger connector. Limit switch is insulated through an optocoupler and trigger output is open drain type. Toslink transmitter DLT1111 and Toslink receiver DLR1111 were used, which enable data transfer speed up to 16 Mbps. We used Xilinx XC9572XL CPLD to implement the necessary logic for protocol conversion. Receivers can also be connected in daisy chain.
 
-![toslink-cnc-1](images/transceiver-pinout.jpg)
+![toslink-cnc-1](images/toslink-transceiver-diagram.png)
+![toslink-cnc-1-1](images/toslink-receiver-2-diagram.png)
 
 ## Toslink Transmitter
 
 Transmitter consists of two PCBs, an Arduino sield and a Toslink transciever. Both PCBs are stacked together. Toslink transciever PCB is identical to one used for receiver. Arduino shield consists of headers for Arduino and connectors for [CNC USB Controller Mk3/4 from Planet CNC](http://www.planet-cnc.com/index.php?page=hardware) and PoStep25-32 driver. There is also a terminal block for connecting limit switches and trigger signals. Circuit can be powered either through terminal block (+5V), through Arduino Uno if attached as a shield, or from Planet CNC Controller.
+
+![toslink-cnc-1-2](images/toslink-transmitter-diagram.png)
 
 ## Toslink Transmitter / Arduino Shield
 
