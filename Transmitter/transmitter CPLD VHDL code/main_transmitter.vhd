@@ -10,7 +10,8 @@ entity main_transmitter is
 			  trigger_in : std_logic_vector (2 downto 0);
            fiber_out1 : out  std_logic;
 			  fiber_out2 : out  std_logic;
-			  led_enable : out  std_logic
+			  led_enable : out  std_logic;
+			  dir_x_out  : out  std_logic
   			);
 end main_transmitter;
 
@@ -61,7 +62,9 @@ begin
 	fiber_out2 <= trigger_in(0);
 	
 	led_enable <= not out_enable;
-		
+	
+	dir_x_out <= parallel_in(1);
+
 	in_step_x <= parallel_in(0);
 	in_dir_x <= parallel_in(1);
 	in_step_y <= parallel_in(2);
