@@ -89,7 +89,7 @@ Step sampler is a finite state machine. It's diagram of possible states is prese
 
 ##Known Isues
 
- * There is not enough room on the CPLD to hold both, the transmitter and the receiver. To enable transfer of limit switch signals from receivers back to transmitter, there would also need to be an additional optical receiver implemented on the transmitter PCB's CPLD. This problem can be solved by stacking two transcievers one over another. Firmware for the second transciever is currently under development.
+ * There is not enough room on the CPLD to hold both, the transmitter and the receiver. To enable transfer of limit switch signals from receivers back to transmitter, there would also need to be an additional optical receiver implemented on the transmitter PCB's CPLD. This problem can be solved by stacking two transcievers one over another. Firmware for the second transciever is available in Transmitter folder.
 
 ##Buy
 You can order ToslinkCNC KIT from our partner company [Fabrikor](http://fabrikor.eu/index.php?route=product/category&path=60). 
