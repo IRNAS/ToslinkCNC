@@ -6,17 +6,17 @@ use IEEE.std_logic_unsigned.all;
 entity main_receiver is
     Port ( 
 	        iCLK : in  STD_LOGIC;
-		    axis_sel : in std_logic_vector(2 downto 0);
-		    limit : in std_logic;
-		    trigger : out std_logic;
-            parallel_out : out  STD_LOGIC_VECTOR (2 downto 0);
-            fiber_in : in  STD_LOGIC;
-			fiber_out1 : out  STD_LOGIC;
-			fiber_out2 : out  STD_LOGIC;
-			led_error : out std_logic;
-			led_enable : out std_logic;
-			dir_output : out std_logic;
-			limit_output : out std_logic
+		     axis_sel : in std_logic_vector(2 downto 0);
+		     limit : in std_logic;
+		     trigger : out std_logic;
+           parallel_out : out  STD_LOGIC_VECTOR (2 downto 0);
+           fiber_in : in  STD_LOGIC;
+			  fiber_out1 : out  STD_LOGIC;
+			  fiber_out2 : out  STD_LOGIC;
+			  led_error : out std_logic;
+			  led_enable : out std_logic;
+			  dir_output : out std_logic;
+			  limit_output : out std_logic
 			);
 end main_receiver;
 
@@ -68,11 +68,11 @@ begin
 						  irq => irq
 					  );
 	
-	fiber_out1 <= fiber_in;
-	fiber_out2 <= fiber_in;
+	fiber_out1 <= fiber_out;
+	fiber_out2 <= fiber_out;
 	
-	dir_output <= out_dir;
-	limit_output <= limit;
+	--dir_output <= out_dir;
+	--limit_output <= limit;
 	
 	out_enable <= s(2);
 	

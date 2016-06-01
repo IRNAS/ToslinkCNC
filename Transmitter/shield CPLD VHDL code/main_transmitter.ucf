@@ -8,9 +8,9 @@ NET "fiber_out2"  LOC = "p34"  ; #TX2
 #NET "limit_out<1>"  LOC = "p22"  ; #limit Y
 #NET "limit_out<2>"  LOC = "p41"  ; #limit Z
 
-NET "limit_in<0>"  LOC = "p37"  ; #trigger 1
-NET "limit_in<1>"  LOC = "p20"  ; #trigger 2
-NET "limit_in<2>"  LOC = "p21"  ; #trigger 2
+NET "trigger_in<0>"  LOC = "p37"  ; #trigger 1
+NET "trigger_in<1>"  LOC = "p20"  ; #trigger 2
+NET "trigger_in<2>"  LOC = "p21"  ; #trigger 2
 
 NET "parallel_in<0>" LOC = "p2"  ; #step X
 NET "parallel_in<1>" LOC = "p12"  ; #dir X
