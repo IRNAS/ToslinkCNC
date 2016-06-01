@@ -1,4 +1,4 @@
-update=13.4.2016 14:56:30
+update=31.5.2016 14:49:15
 version=1
 last_client=kicad
 [pcbnew]
@@ -67,7 +67,7 @@ LibName35=rpi_header
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=
+PlotDirectoryName=../../
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=

@@ -1,4 +1,4 @@
-update=12.5.2016 9:53:52
+update=31.5.2016 14:52:00
 version=1
 last_client=kicad
 [pcbnew]
@@ -66,7 +66,7 @@ LibName34=sn74lv21apwr__and_gate
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=../
+PlotDirectoryName=../../
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=
