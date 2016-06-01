@@ -1,17 +1,17 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL; 
+use IEEE.std_logic_1164.ALL;
+use IEEE.std_logic_ARITH.ALL; 
 use IEEE.std_logic_unsigned.all;
 
 entity optic_transmitter is
-    Port ( 
-	        iCLK : in  STD_LOGIC;
-		     s : in  STD_LOGIC_VECTOR (9 downto 0);
-		     optic_out : out  STD_LOGIC
+    port ( 
+	        iCLK : in  std_logic;
+		     s : in  std_logic_vector (9 downto 0);
+		     optic_out : out  std_logic
 		   );
 end optic_transmitter;
 
-architecture Behavioral of optic_transmitter is
+architecture logic of optic_transmitter is
 
 	function odd_parity (X : std_logic_vector) return std_logic is
 		variable TMP : std_logic := '0';
@@ -22,21 +22,11 @@ architecture Behavioral of optic_transmitter is
 	  return TMP;
 	end odd_parity;
 
-	function log2 (x : positive) return natural is
-		variable i : natural;
-	begin
-		i := 0;  
-		while (2**i < x) and i < 31 loop
-			i := i + 1;
-		end loop;
-		return i;
-	end log2;
-
-	signal shift_reg : STD_LOGIC_VECTOR(11 downto 0) := "000000100010";
-	signal tx_output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
-	signal optic_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
-	signal bit_cnt : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
-	--signal start_of_frame : STD_LOGIC := '0';
+	signal shift_reg : std_logic_vector(11 downto 0) := "000000100010";
+	signal tx_output : std_logic_vector(1 downto 0) := (others => '0');
+	signal optic_cnt : std_logic_vector(4 downto 0) := (others => '0');
+	signal bit_cnt : std_logic_vector(3 downto 0) := (others => '0');
+	--signal start_of_frame : std_logic := '0';
 
 begin
 					  
@@ -119,4 +109,4 @@ begin
 		end if;
 	end process;
 	
-end Behavioral;
+end logic;

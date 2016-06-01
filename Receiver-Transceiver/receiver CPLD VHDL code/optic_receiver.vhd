@@ -4,29 +4,29 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.std_logic_unsigned.all;
 
 entity optic_receiver is
-    Port( 
-			iCLK : IN std_logic; 
-			axis_sel : in std_logic_vector(2 downto 0);
-			optic_in : IN std_logic;
-	     	limit : in std_logic;
-		    optic_out : out std_logic;
-			s : OUT STD_LOGIC_VECTOR(2 downto 0);
-			led_error : out std_logic;
-			trigger : out std_logic;
-			irq : out std_logic
-		);
+    port( 
+				iCLK : in std_logic; 
+				axis_sel : in std_logic_vector(2 downto 0);
+				optic_in : in std_logic;
+				limit : in std_logic;
+				optic_out : out std_logic;
+				s : out std_logic_vector(2 downto 0);
+				led_error : out std_logic;
+				trigger : out std_logic;
+				irq : out std_logic
+		  );
 end optic_receiver;
 
-architecture Behavioral of optic_receiver is
+architecture logic of optic_receiver is
 
 	component manchester_decoder is
 		port(
-		        iCLK : in std_logic;
-				no_link : out std_logic;
-				optic_in : in std_logic;
-				irq_out : out std_logic;
-				decoded_out : out std_logic_vector(1 downto 0)
-			);	
+				 iCLK : in std_logic;
+				 no_link : out std_logic;
+				 optic_in : in std_logic;
+				 irq_out : out std_logic;
+				 decoded_out : out std_logic_vector(1 downto 0)
+			 );	
    end component;
 
 	function odd_parity (X : std_logic_vector) return std_logic is
@@ -38,15 +38,15 @@ architecture Behavioral of optic_receiver is
 	  return TMP;
 	end odd_parity;
 
-	signal rx_input : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	signal rx_input : std_logic_vector(1 downto 0) := (others => '0');
 	signal latch_rx : std_logic := '0';
 	signal latch_rx_prev : std_logic := '0';
 	
-	signal shift_reg : STD_LOGIC_VECTOR(11 downto 0) := "000000100000";
+	signal shift_reg : std_logic_vector(11 downto 0) := "000000100010";
 	signal parity : std_logic := '1';
-	signal optic_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+	signal optic_cnt : std_logic_vector(4 downto 0) := (others => '0');
 	
-	signal tx_output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	signal tx_output : std_logic_vector(1 downto 0) := (others => '0');
 	
 	signal crc_error : std_logic := '0';
 	signal no_link : std_logic := '0';
@@ -56,13 +56,13 @@ begin
 	led_error <= crc_error;
 	
 	decoder:manchester_decoder
-		 Port map ( 
-					iCLK => iCLK,
-					no_link => no_link,
-					optic_in => optic_in,
-					irq_out => latch_rx,
-					decoded_out => rx_input
-				  );
+		 port map ( 
+						 iCLK => iCLK,
+						 no_link => no_link,
+						 optic_in => optic_in,
+						 irq_out => latch_rx,
+						 decoded_out => rx_input
+				    );
 					  
 	shift_register:process (iCLK)
 	begin
@@ -160,7 +160,7 @@ begin
 				trigger <= '0';
 				optic_out <= '0';
 				latch_rx_prev <= '0';
-				shift_reg <= "000000010000";
+				shift_reg <= "000000100010";
 				parity <= '1';
 				optic_cnt <= (others => '0');
 				tx_output <= (others => '0');
@@ -169,4 +169,4 @@ begin
 		end if;
 	end process;
 	
-end Behavioral;
+end logic;

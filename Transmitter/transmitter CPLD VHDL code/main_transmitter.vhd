@@ -1,28 +1,28 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL; 
+use IEEE.std_logic_1164.ALL;
+use IEEE.std_logic_ARITH.ALL; 
 use IEEE.std_logic_unsigned.all;
 
 entity main_transmitter is
-    Port ( 
-	        iCLK : in  STD_LOGIC;
-            parallel_in : in  STD_LOGIC_VECTOR (6 downto 0);
-			trigger_in : STD_LOGIC_VECTOR (2 downto 0);
-            fiber_out1 : out  STD_LOGIC;
-			fiber_out2 : out  STD_LOGIC;
-			led_enable : out  std_logic
+    port ( 
+	        iCLK : in  std_logic;
+           parallel_in : in  std_logic_vector (6 downto 0);
+			  trigger_in : std_logic_vector (2 downto 0);
+           fiber_out1 : out  std_logic;
+			  fiber_out2 : out  std_logic;
+			  led_enable : out  std_logic
   			);
 end main_transmitter;
 
-architecture Behavioral of main_transmitter is
+architecture logic of main_transmitter is
 	
-	COMPONENT optic_transmitter
-		PORT(
-				iCLK : IN std_logic;
-				s    : IN  STD_LOGIC_VECTOR(9 downto 0);
-				optic_out : OUT std_logic
+	component optic_transmitter
+		port(
+				iCLK : in std_logic;
+				s    : in  std_logic_vector(9 downto 0);
+				optic_out : out std_logic
 			 );
-	END COMPONENT;
+	end component;
 	
 	-- transmitter
 	signal in_step_x:std_logic := '0';
@@ -47,7 +47,7 @@ architecture Behavioral of main_transmitter is
 
 	signal transmitt_reg:std_logic_vector(9 downto 0) := "0000001000";
 	
-	signal fiber_out : STD_LOGIC := '0';
+	signal fiber_out : std_logic := '0';
 	
 	signal delay_cnt : std_logic_vector(8 downto 0) := (others => '0');
 	
@@ -71,7 +71,7 @@ begin
 	in_enable <= parallel_in(6);
 
 	optic_transmitter_inst:optic_transmitter
-		 Port map (
+		 port map (
 						  iCLK => iCLK,
 						  s => transmitt_reg,
 						  optic_out => fiber_out
@@ -146,4 +146,4 @@ begin
 		end if;
 	end process;
 
-end Behavioral;
+end logic;

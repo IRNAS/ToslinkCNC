@@ -1,18 +1,18 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL; 
+use IEEE.std_logic_1164.ALL;
+use IEEE.std_logic_ARITH.ALL; 
 use IEEE.std_logic_unsigned.all;
 
 entity main_receiver is
-    Port ( 
-	        iCLK : in  STD_LOGIC;
+    port ( 
+	        iCLK : in  std_logic;
 		     axis_sel : in std_logic_vector(2 downto 0);
 		     limit : in std_logic;
 		     trigger : out std_logic;
-           parallel_out : out  STD_LOGIC_VECTOR (2 downto 0);
-           fiber_in : in  STD_LOGIC;
-			  fiber_out1 : out  STD_LOGIC;
-			  fiber_out2 : out  STD_LOGIC;
+           parallel_out : out  std_logic_vector (2 downto 0);
+           fiber_in : in  std_logic;
+			  fiber_out1 : out  std_logic;
+			  fiber_out2 : out  std_logic;
 			  led_error : out std_logic;
 			  led_enable : out std_logic;
 			  dir_output : out std_logic;
@@ -20,21 +20,21 @@ entity main_receiver is
 			);
 end main_receiver;
 
-architecture Behavioral of main_receiver is
+architecture logic of main_receiver is
 
-	COMPONENT optic_receiver
-		PORT(
-				iCLK : IN std_logic; 
+	component optic_receiver
+		port(
+				iCLK : in std_logic; 
 				axis_sel : in std_logic_vector(2 downto 0);
-				optic_in : IN std_logic;
+				optic_in : in std_logic;
 				limit : in std_logic;
 				optic_out : out std_logic;
-				s : OUT STD_LOGIC_VECTOR(2 downto 0);
+				s : out std_logic_vector(2 downto 0);
 				led_error : out std_logic;
 				trigger : out std_logic;
 				irq : out std_logic
 			 );
-	END COMPONENT;
+	end component;
 	
 	signal fiber_out:std_logic := '0';
 	
@@ -56,7 +56,7 @@ architecture Behavioral of main_receiver is
 begin
 
 	optic_receiver_inst:optic_receiver
-		 Port map ( 
+		 port map ( 
 						  iCLK => iCLK,
 						  axis_sel => axis_sel,
 						  optic_in => fiber_in,
@@ -111,4 +111,4 @@ begin
 		
 		end if;
 	end process;  
-end Behavioral;
+end logic;
