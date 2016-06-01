@@ -23,8 +23,8 @@ NET "limit_out<2>"  LOC = "p41"  ; #limit Z
 NET "led_error" LOC = "p42" ; #error LED
 NET "led_enable" LOC = "p43" ; #enable LED
 
-#NET "dir_x_out"  LOC = "p3" ; #dir X output
-NET "limit_x_out" LOC = "p38" ; #limit X output
+#NET "limit_x_in"  LOC = "p38"  ; #limit X input
+#NET "dir_x_out"     LOC = "p3"   ; #dir X output
 
 NET "iCLK" TNM_NET = iCLK;
 timespec TS_iCLK = PERIOD "iCLK" 20 ns HIGH 50%;

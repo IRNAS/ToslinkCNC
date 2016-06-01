@@ -22,7 +22,7 @@ NET "parallel_in<6>" LOC = "p5"   ; #enable
 
 NET "led_enable" LOC = "p43"  ; #enable LED
 
-#NET "limit_x_out"  LOC = "p38"  ; #limit X output
+#NET "limit_x_in"  LOC = "p38"  ; #limit X input
 NET "dir_x_out"     LOC = "p3"   ; #dir X output
 
 NET "iCLK" TNM_NET = iCLK;
