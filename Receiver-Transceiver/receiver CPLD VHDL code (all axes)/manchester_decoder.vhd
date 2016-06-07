@@ -1,32 +1,36 @@
 library IEEE;
-use IEEE.std_logic_1164.ALL;
-use IEEE.std_logic_ARITH.ALL;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.std_logic_unsigned.all;
 
 entity manchester_decoder is
 	port(
 			iCLK : in std_logic;
-			no_link : out std_logic;
+			no_link_out : out std_logic;
 		   optic_in : in std_logic;
 			irq_out : out std_logic;
 			decoded_out : out std_logic_vector(1 downto 0)
 		 );	
 end manchester_decoder;
 
-architecture logic of manchester_decoder is
+architecture Behavioral of manchester_decoder is
 
 	-- low pass filter
-	signal q1 : std_logic := '0';
-	signal samp : std_logic := '0';
-	signal samp2 : std_logic := '0';
+	signal q1 : STD_LOGIC := '0';
+	signal samp : STD_LOGIC := '0';
+	signal samp2 : STD_LOGIC := '0';
 	
 	-- rx_tx shift register
-	signal sampling_cnt : std_logic_vector(4 downto 0) := (others => '0');
-	signal step_cnt : std_logic_vector(1 downto 0) := (others => '0');
-	signal prev_step : std_logic_vector(1 downto 0) := (others => '0');
-	signal output : std_logic_vector(1 downto 0) := (others => '0');
+	signal sampling_cnt : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+	signal step_cnt : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	signal prev_step : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	signal output : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	
+	signal no_link : std_logic := '0';
 
 begin
+
+	no_link_out <= no_link;
 
 	input_low_pass:process (iCLK)
 	begin
@@ -83,7 +87,7 @@ begin
 				sampling_cnt <= (others => '0');
 				
 			else
-				if (sampling_cnt = 31) then -- if connection lost
+				if (sampling_cnt = 31) then
 					sampling_cnt <= (others => '0');
 					step_cnt <= (others => '0');
 					prev_step <= (others => '0');
@@ -98,4 +102,4 @@ begin
 			
 		end if;
 	end process;
-end logic;
+end Behavioral;

@@ -18,10 +18,10 @@ architecture logic of optic_receiver is
 	component manchester_decoder is
 		port(
 				 iCLK : in std_logic;
-				 no_link : out std_logic;
-				 optic_in : in std_logic;
-				 irq_out : out std_logic;
-				 decoded_out : out std_logic_vector(1 downto 0)
+			    no_link_out : out std_logic;
+		       optic_in : in std_logic;
+			    irq_out : out std_logic;
+			    decoded_out : out std_logic_vector(1 downto 0)
 			 );	
    end component;
 
@@ -51,7 +51,7 @@ begin
 	decoder:manchester_decoder
 		 port map ( 
 						 iCLK => iCLK,
-						 no_link => no_link,
+						 no_link_out => no_link,
 						 optic_in => optic_in,
 						 irq_out => latch_rx,
 						 decoded_out => rx_input
