@@ -9,8 +9,7 @@ entity main_transmitter_return is
            limit_out : out std_logic_vector (2 downto 0);
            fiber_in : in std_logic;
 			  led_error : out std_logic;
-			  led_enable : out std_logic;
-			  limit_x_out : out std_logic
+			  led_enable : out std_logic
 			);
 end main_transmitter_return;
 
@@ -42,8 +41,6 @@ begin
 					 );
 	
 	limit_out <= s;
-	
-	limit_x_out <= s(0);
 	
 	led_enable <= not out_enable;
 						 
