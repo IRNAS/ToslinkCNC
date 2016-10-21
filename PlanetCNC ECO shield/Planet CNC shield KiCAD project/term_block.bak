@@ -1,0 +1,18 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# term_block
+#
+DEF term_block P 0 40 Y Y 1 F N
+F0 "P" 0 300 60 H V C CNN
+F1 "term_block" 0 200 60 H V C CNN
+F2 "VQFP44:terminal_block" 25 -325 60 H I C CNN
+F3 "" -50 0 60 H V C CNN
+DRAW
+S -100 100 100 -100 0 1 0 N
+X 1 1 -50 -250 150 U 50 50 1 1 I
+X 2 2 50 -250 150 U 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library

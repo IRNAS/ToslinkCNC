@@ -1,0 +1,356 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:rpi_header
+LIBS:solder_bridge
+LIBS:xc9572xl
+LIBS:planet_CNC_ECO_pcb
+LIBS:term_block
+LIBS:Toslink PlanetCNC ECO shield-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title "Toslink CNC To Planet CNC ECO Shield"
+Date "2016-10-21"
+Rev "1.0"
+Comp "Institute IRNAS Rače"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L RPI_header P1
+U 1 1 58088647
+P 6975 3825
+F 0 "P1" H 6575 4525 60  0000 C CNN
+F 1 "Toslink CNC Transciever" H 6950 3125 60  0000 C CNN
+F 2 "toslink_pcb:toslink_pcb" H 6975 3825 60  0001 C CNN
+F 3 "" H 6975 3825 60  0000 C CNN
+	1    6975 3825
+	1    0    0    -1  
+$EndComp
+NoConn ~ 6325 3225
+Text GLabel 6325 3325 0    60   Input ~ 0
+LIMIT_X
+Text GLabel 6325 3425 0    60   Input ~ 0
+LIMIT_Y
+Text GLabel 6325 3525 0    60   Input ~ 0
+ENABLE
+Text GLabel 6325 3725 0    60   Input ~ 0
+STEP_X
+Text GLabel 6325 3825 0    60   Input ~ 0
+STEP_Y
+Text GLabel 6325 3925 0    60   Input ~ 0
+STEP_Z
+Text GLabel 7575 3525 2    60   Input ~ 0
+TRIGGER3
+Text GLabel 7575 3625 2    60   Input ~ 0
+TRIGGER2
+Text GLabel 7575 3725 2    60   Input ~ 0
+TRIGGER1
+Text GLabel 7575 3925 2    60   Input ~ 0
+DIR_Z
+Text GLabel 7575 4025 2    60   Input ~ 0
+DIR_Y
+Text GLabel 7575 4225 2    60   Input ~ 0
+DIR_X
+Text GLabel 7575 4425 2    60   Input ~ 0
+LIMIT_Z
+NoConn ~ 7575 4325
+NoConn ~ 6325 4125
+NoConn ~ 6325 4225
+NoConn ~ 6325 4325
+Wire Wire Line
+	6325 3625 5900 3625
+NoConn ~ 6325 4025
+$Comp
+L GND #PWR7
+U 1 1 5808A4DC
+P 6325 4425
+F 0 "#PWR7" H 6325 4175 50  0001 C CNN
+F 1 "GND" H 6325 4275 50  0000 C CNN
+F 2 "" H 6325 4425 60  0000 C CNN
+F 3 "" H 6325 4425 60  0000 C CNN
+	1    6325 4425
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR10
+U 1 1 5808A4FA
+P 8125 3425
+F 0 "#PWR10" H 8125 3175 50  0001 C CNN
+F 1 "GND" H 8125 3275 50  0000 C CNN
+F 2 "" H 8125 3425 60  0000 C CNN
+F 3 "" H 8125 3425 60  0000 C CNN
+	1    8125 3425
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR11
+U 1 1 5808A53E
+P 8125 3825
+F 0 "#PWR11" H 8125 3575 50  0001 C CNN
+F 1 "GND" H 8125 3675 50  0000 C CNN
+F 2 "" H 8125 3825 60  0000 C CNN
+F 3 "" H 8125 3825 60  0000 C CNN
+	1    8125 3825
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR5
+U 1 1 5808A57C
+P 5900 3625
+F 0 "#PWR5" H 5900 3375 50  0001 C CNN
+F 1 "GND" H 5900 3475 50  0000 C CNN
+F 2 "" H 5900 3625 60  0000 C CNN
+F 3 "" H 5900 3625 60  0000 C CNN
+	1    5900 3625
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR8
+U 1 1 5808A644
+P 7925 4125
+F 0 "#PWR8" H 7925 3875 50  0001 C CNN
+F 1 "GND" H 7925 3975 50  0000 C CNN
+F 2 "" H 7925 4125 60  0000 C CNN
+F 3 "" H 7925 4125 60  0000 C CNN
+	1    7925 4125
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7575 4125 7925 4125
+Wire Wire Line
+	7575 3825 8125 3825
+Wire Wire Line
+	7575 3425 8125 3425
+Wire Wire Line
+	7575 3225 8125 3225
+Wire Wire Line
+	7675 3225 7675 3325
+Wire Wire Line
+	7675 3325 7575 3325
+Connection ~ 7675 3225
+$Comp
+L +5V #PWR9
+U 1 1 5808A7D2
+P 8125 3225
+F 0 "#PWR9" H 8125 3075 50  0001 C CNN
+F 1 "+5V" H 8125 3365 50  0000 C CNN
+F 2 "" H 8125 3225 60  0000 C CNN
+F 3 "" H 8125 3225 60  0000 C CNN
+	1    8125 3225
+	0    1    1    0   
+$EndComp
+$Comp
+L Planet_CNC_ECO_PCB P2
+U 1 1 5808B65C
+P 4050 3900
+F 0 "P2" H 3760 4630 50  0000 C CNN
+F 1 "Planet CNC ECO PCB" H 3680 3180 50  0000 L BNN
+F 2 "PlanetCNC_ECO_PCB:PlanetCNC_ECO_PCB" H 4275 3510 50  0001 C CNN
+F 3 "" H 4370 3900 60  0000 C CNN
+	1    4050 3900
+	1    0    0    -1  
+$EndComp
+Text GLabel 3625 3300 0    60   Input ~ 0
+ENABLE
+Text GLabel 3625 3400 0    60   Input ~ 0
+STEP_X
+Text GLabel 3625 3500 0    60   Input ~ 0
+DIR_X
+Text GLabel 3625 3600 0    60   Input ~ 0
+STEP_Y
+Text GLabel 3625 3700 0    60   Input ~ 0
+DIR_Y
+Wire Wire Line
+	3625 3300 3750 3300
+Wire Wire Line
+	3625 3400 3750 3400
+Wire Wire Line
+	3625 3500 3750 3500
+Wire Wire Line
+	3625 3600 3750 3600
+Wire Wire Line
+	3625 3700 3750 3700
+Text GLabel 3625 3800 0    60   Input ~ 0
+STEP_Z
+Text GLabel 3625 3900 0    60   Input ~ 0
+DIR_Z
+Wire Wire Line
+	3625 3800 3750 3800
+Wire Wire Line
+	3625 3900 3750 3900
+NoConn ~ 3750 4000
+NoConn ~ 3750 4100
+Wire Wire Line
+	3750 4200 3625 4200
+Text GLabel 3625 4200 0    60   Input ~ 0
+E-STOP
+Text GLabel 3625 4300 0    60   Input ~ 0
+LIMIT_X
+Text GLabel 3625 4400 0    60   Input ~ 0
+LIMIT_Y
+Wire Wire Line
+	3625 4300 3750 4300
+Wire Wire Line
+	3625 4400 3750 4400
+Text GLabel 3625 4500 0    60   Input ~ 0
+LIMIT_Z
+Wire Wire Line
+	3625 4500 3750 4500
+Wire Wire Line
+	4425 4500 4550 4500
+Wire Wire Line
+	4425 4400 4525 4400
+Wire Wire Line
+	4525 4400 4525 4000
+Wire Wire Line
+	4425 4000 4625 4000
+Wire Wire Line
+	4425 4100 4525 4100
+Connection ~ 4525 4100
+Wire Wire Line
+	4425 4200 4525 4200
+Connection ~ 4525 4200
+Wire Wire Line
+	4425 4300 4525 4300
+Connection ~ 4525 4300
+Connection ~ 4525 4000
+$Comp
+L GND #PWR2
+U 1 1 5808C15F
+P 4625 4000
+F 0 "#PWR2" H 4625 3750 50  0001 C CNN
+F 1 "GND" H 4625 3850 50  0000 C CNN
+F 2 "" H 4625 4000 60  0000 C CNN
+F 3 "" H 4625 4000 60  0000 C CNN
+	1    4625 4000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L +5V #PWR1
+U 1 1 5808C1AF
+P 4550 4500
+F 0 "#PWR1" H 4550 4350 50  0001 C CNN
+F 1 "+5V" H 4550 4640 50  0000 C CNN
+F 2 "" H 4550 4500 60  0000 C CNN
+F 3 "" H 4550 4500 60  0000 C CNN
+	1    4550 4500
+	0    1    1    0   
+$EndComp
+NoConn ~ 4425 3900
+NoConn ~ 4425 3800
+NoConn ~ 4425 3700
+NoConn ~ 4425 3400
+Text GLabel 4550 3300 2    60   Input ~ 0
+TRIGGER3
+Text GLabel 4550 3600 2    60   Input ~ 0
+TRIGGER2
+Text GLabel 4550 3500 2    60   Input ~ 0
+TRIGGER1
+Wire Wire Line
+	4425 3300 4550 3300
+Wire Wire Line
+	4425 3500 4550 3500
+Wire Wire Line
+	4425 3600 4550 3600
+$Comp
+L +5V #PWR4
+U 1 1 5808CE9C
+P 5575 2550
+F 0 "#PWR4" H 5575 2400 50  0001 C CNN
+F 1 "+5V" H 5575 2690 50  0000 C CNN
+F 2 "" H 5575 2550 60  0000 C CNN
+F 3 "" H 5575 2550 60  0000 C CNN
+	1    5575 2550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR6
+U 1 1 5808CEC8
+P 6175 2550
+F 0 "#PWR6" H 6175 2300 50  0001 C CNN
+F 1 "GND" H 6175 2400 50  0000 C CNN
+F 2 "" H 6175 2550 60  0000 C CNN
+F 3 "" H 6175 2550 60  0000 C CNN
+	1    6175 2550
+	0    1    1    0   
+$EndComp
+$Comp
+L PWR_FLAG #FLG1
+U 1 1 5808CF14
+P 5575 2550
+F 0 "#FLG1" H 5575 2645 50  0001 C CNN
+F 1 "PWR_FLAG" H 5575 2730 50  0000 C CNN
+F 2 "" H 5575 2550 60  0000 C CNN
+F 3 "" H 5575 2550 60  0000 C CNN
+	1    5575 2550
+	0    1    1    0   
+$EndComp
+$Comp
+L PWR_FLAG #FLG2
+U 1 1 5808CF2E
+P 6175 2550
+F 0 "#FLG2" H 6175 2645 50  0001 C CNN
+F 1 "PWR_FLAG" H 6175 2730 50  0000 C CNN
+F 2 "" H 6175 2550 60  0000 C CNN
+F 3 "" H 6175 2550 60  0000 C CNN
+	1    6175 2550
+	0    1    1    0   
+$EndComp
+$Comp
+L term_block P3
+U 1 1 5808D452
+P 4500 2600
+F 0 "P3" H 4500 2800 60  0000 C CNN
+F 1 "term_block" H 4500 2700 60  0000 C CNN
+F 2 "terminal_block_2_5mm:terminal_block_2_5mm" H 4525 2275 60  0001 C CNN
+F 3 "" H 4450 2600 60  0000 C CNN
+	1    4500 2600
+	0    -1   -1   0   
+$EndComp
+Text GLabel 4750 2550 2    60   Input ~ 0
+E-STOP
+$Comp
+L GND #PWR3
+U 1 1 5808D7FE
+P 4750 2650
+F 0 "#PWR3" H 4750 2400 50  0001 C CNN
+F 1 "GND" H 4750 2500 50  0000 C CNN
+F 2 "" H 4750 2650 60  0000 C CNN
+F 3 "" H 4750 2650 60  0000 C CNN
+	1    4750 2650
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
